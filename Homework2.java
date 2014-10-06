@@ -1,10 +1,9 @@
-
+﻿
 interface InterSearch {
     /* Požitím interpolačního hledání vrátí index prvku what nalezeného mezi indexy first a last
      pole data nebo -1, pokud tam není. Metoda bude rekurzivní a měla by být odolná vůči chybně 
      zadaným parametrům. Pro zaokrouhlování na celá čísla použijte metodu Math.round(). */
 
-    public int search(int first, int last, int what, int[] data);
 }
 
 public class Homework2 implements InterSearch {
