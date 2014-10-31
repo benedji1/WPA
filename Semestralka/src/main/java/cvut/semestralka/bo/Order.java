@@ -1,10 +1,15 @@
 package cvut.semestralka.bo;
 
 import java.util.List;
+import javax.persistence.Entity;
 import javax.persistence.JoinColumn;
+import javax.persistence.JoinTable;
 import javax.persistence.ManyToMany;
 import javax.persistence.ManyToOne;
+import javax.persistence.Table;
 
+@Entity
+@Table(name="orders")
 public class Order extends DomainEntity{
     
     @ManyToOne
@@ -15,7 +20,10 @@ public class Order extends DomainEntity{
     @JoinColumn(name="id_customer")
     protected Customer customer;
     
-    @ManyToMany(targetEntity = Film.class, mappedBy = "order")
+    @ManyToMany
+    @JoinTable(name="order_film", 
+            joinColumns = {@JoinColumn(name="id_order", referencedColumnName = "id")},
+            inverseJoinColumns = {@JoinColumn(name="id_film", referencedColumnName = "id")})
     protected List<Film> films;
 
     public Employee getEmployee() {

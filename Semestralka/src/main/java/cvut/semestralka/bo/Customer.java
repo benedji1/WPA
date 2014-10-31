@@ -10,6 +10,7 @@ import java.util.List;
 import javax.persistence.DiscriminatorValue;
 import javax.persistence.Entity;
 import javax.persistence.OneToMany;
+import javax.persistence.Table;
 
 /**
  *
@@ -17,6 +18,7 @@ import javax.persistence.OneToMany;
  */
 @Entity
 @DiscriminatorValue("Customer")
+@Table(name="customer")
 public class Customer extends User{
     
     protected String email;

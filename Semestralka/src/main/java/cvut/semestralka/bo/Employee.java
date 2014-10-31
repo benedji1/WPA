@@ -1,30 +1,22 @@
-/*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
- */
-
 package cvut.semestralka.bo;
 
 import java.util.List;
 import javax.persistence.DiscriminatorValue;
 import javax.persistence.Entity;
 import javax.persistence.OneToMany;
+import javax.persistence.Table;
 
-/**
- *
- * @author Koulas
- */
 @Entity
 @DiscriminatorValue("Employee")
+@Table(name="employee")
 public class Employee extends User{
     
     protected String address;
     protected String position;
     
-    @OneToMany(targetEntity = Order.class, mappedBy="customer")
+    @OneToMany(targetEntity = Order.class, mappedBy="employee")
     protected List<Order> orders;
-
+    
     public String getAddress() {
         return address;
     }
@@ -39,5 +31,13 @@ public class Employee extends User{
 
     public void setPosition(String position) {
         this.position = position;
+    }
+
+    public List<Order> getOrders() {
+        return orders;
+    }
+
+    public void setOrders(List<Order> orders) {
+        this.orders = orders;
     }
 }

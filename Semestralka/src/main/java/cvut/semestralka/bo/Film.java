@@ -2,6 +2,7 @@ package cvut.semestralka.bo;
 
 import java.io.Serializable;
 import java.util.List;
+import javax.persistence.EmbeddedId;
 import javax.persistence.Entity;
 import javax.persistence.Id;
 import javax.persistence.IdClass;
@@ -9,22 +10,16 @@ import javax.persistence.JoinColumn;
 import javax.persistence.JoinTable;
 import javax.persistence.ManyToMany;
 import javax.persistence.ManyToOne;
+import javax.persistence.Table;
 
 @Entity
-@IdClass(FilmId.class)
-public class Film implements Serializable{
+public class Film extends DomainEntity{
     
-    @Id
-    protected Integer release_year;
+    String title;
+    Integer release_year;
     
-    @Id
-    protected String title;
-    
-    @ManyToMany()
-    @JoinTable(name="order_film", 
-            joinColumns = {@JoinColumn(name="id_order", referencedColumnName = "id")},
-            inverseJoinColumns = {@JoinColumn(name="id_film", referencedColumnName = "id")})
-    protected List<Order> order;
+    @ManyToMany(targetEntity = Order.class, mappedBy = "films")
+    protected List<Order> orders;
     
     @ManyToMany(targetEntity = Actor.class, mappedBy = "films")
     protected List<Actor> actors;
@@ -33,27 +28,28 @@ public class Film implements Serializable{
     @JoinColumn(name="id_director")
     protected Director director;
 
-    public Integer getRelease_year() {
-        return release_year;
+    public List<Actor> getActors() {
+        return actors;
     }
 
-    public void setRelease_year(Integer release_year) {
-        this.release_year = release_year;
+    public void setActors(List<Actor> actors) {
+        this.actors = actors;
     }
 
-    public String getTitle() {
-        return title;
+    public Director getDirector() {
+        return director;
     }
 
-    public void setTitle(String title) {
-        this.title = title;
+    public void setDirector(Director director) {
+        this.director = director;
     }
 
-    public List<Order> getOrder() {
-        return order;
+
+    public List<Order> getOrders() {
+        return orders;
     }
 
-    public void setOrder(List<Order> order) {
-        this.order = order;
+    public void setOrders(List<Order> orders) {
+        this.orders = orders;
     }
 }
