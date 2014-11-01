@@ -3,7 +3,6 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-
 package cvut.semestralka.dto;
 
 /**
@@ -11,6 +10,7 @@ package cvut.semestralka.dto;
  * @author Koulas
  */
 public abstract class AbstractDTO {
+
     protected Long id;
 
     public Long getId() {
@@ -42,5 +42,5 @@ public abstract class AbstractDTO {
         hash = 89 * hash + (this.id != null ? this.id.hashCode() : 0);
         return hash;
     }
-    
+
 }

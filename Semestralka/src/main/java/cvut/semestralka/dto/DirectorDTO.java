@@ -3,13 +3,15 @@ package cvut.semestralka.dto;
 import cvut.semestralka.bo.Film;
 import java.util.List;
 
-public class DirectorDTO extends AbstractDTO{
-    protected String first_name, last_name;
-    protected List<FilmDTO> films;
+public class DirectorDTO extends AbstractDTO {
 
-    public DirectorDTO(String first_name, String last_name) {
+    protected String first_name, last_name;
+    protected List<Long> films;
+
+    public DirectorDTO(String first_name, String last_name, Long id) {
         this.first_name = first_name;
         this.last_name = last_name;
+        this.id = id;
     }
 
     public String getFirst_name() {
@@ -28,11 +30,11 @@ public class DirectorDTO extends AbstractDTO{
         this.last_name = last_name;
     }
 
-    public List<FilmDTO> getFilms() {
+    public List<Long> getFilms() {
         return films;
     }
 
-    public void setFilms(List<FilmDTO> films) {
+    public void setFilms(List<Long> films) {
         this.films = films;
     }
 }

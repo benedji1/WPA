@@ -7,8 +7,12 @@ public class OrderDTO extends AbstractDTO {
 
     protected Long employee;
     protected Long customer;
-    protected List<FilmDTO> films;
+    protected List<Long> films;
 
+    public OrderDTO(Long id) {
+        this.id = id;
+    }
+    
     public Long getEmployee() {
         return employee;
     }
@@ -25,11 +29,11 @@ public class OrderDTO extends AbstractDTO {
         this.customer = customer;
     }
 
-    public List<FilmDTO> getFilms() {
+    public List<Long> getFilms() {
         return films;
     }
 
-    public void setFilms(List<FilmDTO> films) {
+    public void setFilms(List<Long> films) {
         this.films = films;
     }
 }

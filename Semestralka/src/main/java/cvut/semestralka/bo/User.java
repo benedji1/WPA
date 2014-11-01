@@ -15,7 +15,7 @@ public class User extends DomainEntity{
     
     protected String first_name;
     protected String last_name; 
-
+    
     public String getFirstName() {
         return first_name;
     }

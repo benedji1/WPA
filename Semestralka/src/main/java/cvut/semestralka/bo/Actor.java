@@ -30,6 +30,14 @@ public class Actor extends DomainEntity{
     public void setLast_name(String last_name) {
         this.last_name = last_name;
     }
+
+    public List<Film> getFilms() {
+        return films;
+    }
+
+    public void setFilms(List<Film> films) {
+        this.films = films;
+    }
     
     
 }

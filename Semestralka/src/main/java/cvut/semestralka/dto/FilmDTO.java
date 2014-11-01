@@ -3,7 +3,6 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-
 package cvut.semestralka.dto;
 
 import java.util.List;
@@ -12,11 +11,18 @@ import java.util.List;
  *
  * @author Koulas
  */
-public class FilmDTO{
+public class FilmDTO extends AbstractDTO {
+
     protected Integer release_year;
     protected String title;
     protected List<Long> orders;
     protected List<Long> actors;
+
+    public FilmDTO(Integer release_year, String title, Long id) {
+        this.release_year = release_year;
+        this.title = title;
+        this.id = id;
+    }
 
     public Integer getRelease_year() {
         return release_year;

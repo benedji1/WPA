@@ -4,7 +4,7 @@ public abstract class UserDTO extends AbstractDTO{
     
     protected String first_name, last_name;
 
-    public UserDTO(String first_name, String last_name) {
+    public UserDTO(String first_name, String last_name, Long id) {
         this.first_name = first_name;
         this.last_name = last_name;
     }

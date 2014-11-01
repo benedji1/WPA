@@ -17,6 +17,7 @@ import javax.persistence.criteria.CriteriaBuilder;
 import javax.persistence.criteria.CriteriaQuery;
 import javax.persistence.criteria.ParameterExpression;
 import javax.persistence.criteria.Root;
+import org.hibernate.Session;
 
 /**
  *
@@ -108,12 +109,12 @@ public class GenericDao implements GenericDaoI {
     public <E> Long remove(Class<E> clazz, Long id) {
         E entity = findBy(clazz, "id", id.toString());
         EntityManager manager = getEntityManager();
-        
-        manager.getTransaction().begin();    
-        manager.remove(entity);    
+
+        manager.getTransaction().begin();
+        manager.remove(entity);
         manager.getTransaction().commit();
         manager.close();
-        
+
         return id;
     }
 
@@ -137,6 +138,17 @@ public class GenericDao implements GenericDaoI {
             return null;
         }
         return list.get(0);
+    }
+
+    @Override
+    public <E> List<E> getByProperty(String property, Object value, Class<E> clazz) {
+        String queryString = "SELECT e FROM " + clazz.getSimpleName()+ " e WHERE e." + property + " = :value";
+        return getEntityManager().createQuery(queryString).setParameter("value", value).getResultList();
+    }
+
+    @Override
+    public <E> E getById(Long id, Class<E> clazz) {
+        return (E) ((Session) getEntityManager().getDelegate()).load(clazz, id);
     }
 
 }
