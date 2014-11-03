@@ -2,7 +2,6 @@ package cvut.semestralka.service;
 
 import cvut.semestralka.bo.Employee;
 import cvut.semestralka.dao.GenericDao;
-import cvut.semestralka.dao.GenericDaoI;
 import cvut.semestralka.dto.EmployeeDTO;
 import cvut.semestralka.tools.Tools;
 import java.util.ArrayList;

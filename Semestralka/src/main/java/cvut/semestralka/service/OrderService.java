@@ -11,7 +11,9 @@ import cvut.semestralka.bo.Film;
 import cvut.semestralka.bo.Orders;
 import cvut.semestralka.dto.OrderDTO;
 import java.util.ArrayList;
+import java.util.Iterator;
 import java.util.List;
+
 
 /**
  *
@@ -73,6 +75,16 @@ public class OrderService extends AbstractService {
         }
         return ordersDto;
     }
+    
+    public List<OrderDTO> getFilmOrders(Long idFilm){
+        List<Orders> orders = mdao.getFilmOrders(idFilm);        
+        List<OrderDTO> odtos = new ArrayList<OrderDTO>();    
+        for (Orders o : orders) {
+            odtos.add(new OrderDTO(o.getId()));       
+        }    
+        return odtos;
+    }
+    
     /*
      dalsi metody...
      */

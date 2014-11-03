@@ -59,13 +59,21 @@ public class FilmService extends AbstractService {
     }
 
     public List<FilmDTO> getActorsFilms(Long actorId) {
-        //zatím nevim jak na to
-        return null;
+        List<Film> films = mdao.getActorFilms(actorId);  
+        List<FilmDTO> fdtos = new ArrayList<FilmDTO>();
+        for(Film f : films){
+            fdtos.add(new FilmDTO(f.getRelease_year(), f.getTitle(), f.getId()));
+        }
+        return fdtos;
     }
 
     public List<FilmDTO> getFilmsInOrder(Long orderId) {
-        //zatím nevim jak na to
-        return null;
+        List<Film> films = mdao.getOrderFilms(orderId);
+        List<FilmDTO> fdtos = new ArrayList<FilmDTO>();
+        for(Film f : films){
+            fdtos.add(new FilmDTO(f.getRelease_year(), f.getTitle(), f.getId()));
+        }
+        return fdtos;
     }
 
     public FilmDTO addDirector(Long directorID, FilmDTO filmDto) {

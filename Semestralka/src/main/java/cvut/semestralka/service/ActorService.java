@@ -49,8 +49,12 @@ public class ActorService extends AbstractService {
     }
 
     public List<ActorDTO> getAllActorsFromFilm(Long filmId) {
-        //zatim nevim jak na to
-        return null;
+       List<Actor> actors = mdao.getFilmActors(filmId); 
+       List<ActorDTO> adtos = new ArrayList<ActorDTO>();      
+       for(Actor a : actors){
+           adtos.add(new ActorDTO(a.getFirst_name(), a.getLast_name(), a.getId()));
+       }    
+       return adtos;
     }
 
     public ActorDTO addFilm(FilmDTO updated, Long actorId) {

@@ -6,11 +6,13 @@ import cvut.semestralka.bo.DomainEntity;
 import cvut.semestralka.bo.Employee;
 import cvut.semestralka.bo.Film;
 import cvut.semestralka.dao.GenericDao;
-import cvut.semestralka.dao.GenericDaoI;
+import cvut.semestralka.dao.ManyToManyDao;
+import cvut.semestralka.dto.ActorDTO;
 import cvut.semestralka.dto.DirectorDTO;
 import cvut.semestralka.dto.EmployeeDTO;
 import cvut.semestralka.dto.FilmDTO;
 import cvut.semestralka.dto.OrderDTO;
+import cvut.semestralka.service.ActorService;
 import cvut.semestralka.service.EmployeeService;
 import cvut.semestralka.service.FilmService;
 import cvut.semestralka.service.OrderService;
@@ -78,10 +80,12 @@ public class Main {
 //        for(OrderDTO o : orders){
 //            System.out.println(o.getId());
 //        }
-        GenericDaoI gd = GenericDao.getDao();
-        List<Actor> ent= gd.getManyToMany(6L);
-        for(Actor a : ent){
-            System.out.println(a.getFirst_name());
+        ActorService as = ActorService.getActorService();
+        FilmService fs = FilmService.getFilmService();
+        OrderService os = OrderService.getOrderService();
+        List<OrderDTO> ent= os.getFilmOrders(7L);
+        for(OrderDTO a : ent){
+            System.out.println(a.getId());
         }
         
     }

@@ -8,7 +8,7 @@ import javax.persistence.ManyToMany;
 import javax.persistence.NamedQuery;
 
 @Entity
-@NamedQuery(name = "getActors",query = "select actor from Actor actor inner join actor.films film where film.id = :value")
+@NamedQuery(name = "getFilmActors",query = "select actor from Actor actor inner join actor.films film where film.id = :value")
 public class Actor extends DomainEntity {
 
     protected String first_name, last_name;

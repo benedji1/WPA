@@ -23,39 +23,25 @@ import org.hibernate.Session;
  *
  * @author Koulas
  */
-public class GenericDao implements GenericDaoI {
+public class GenericDao extends AbstractDao{
 
-    private static GenericDaoI genericDao;
-    private static EntityManagerFactory factory;
+    private static GenericDao genericDao;
 
     private GenericDao() {
     }
 
-    public static GenericDaoI getDao() {
+    public static GenericDao getDao() {
         if (genericDao == null) {
             genericDao = new GenericDao();
         }
         return genericDao;
     }
 
-    private static EntityManagerFactory getFactory() {
-        if (factory == null) {
-            factory = Persistence.createEntityManagerFactory("persistence_unit");
-        }
-        return factory;
-    }
-
-    private static EntityManager getEntityManager() {
-        return getFactory().createEntityManager();
-    }
-
-    @Override
     public <E> List<E> getAll(Class<E> clazz) {
         List<E> entities = getEntityManager().createQuery("select e from " + clazz.getSimpleName() + " e").getResultList();
         return entities;
     }
 
-    @Override
     public <E extends DomainEntity> E saveOrUpdate(E instance) {
         if (instance.getId() == null) {
             this.save(instance);
@@ -65,7 +51,6 @@ public class GenericDao implements GenericDaoI {
         return instance;
     }
 
-    @Override
     public <E> E save(E instance) {
         EntityManager manager = getEntityManager();
         manager.getTransaction().begin();
@@ -78,7 +63,6 @@ public class GenericDao implements GenericDaoI {
         return instance;
     }
 
-    @Override
     public <E> E update(E instance) {
         EntityManager manager = getEntityManager();
         manager.getTransaction().begin();
@@ -91,7 +75,6 @@ public class GenericDao implements GenericDaoI {
         return instance;
     }
 
-    @Override
     public <E> void removeAll(Class<E> clazz) {
         EntityManager manager = getEntityManager();
         manager.getTransaction().begin();
@@ -105,7 +88,6 @@ public class GenericDao implements GenericDaoI {
         manager.getTransaction().commit();
     }
 
-    @Override
     public <E> Long remove(Class<E> clazz, Long id) {
         E entity = findBy(clazz, "id", id.toString());
         EntityManager manager = getEntityManager();
@@ -118,7 +100,6 @@ public class GenericDao implements GenericDaoI {
         return id;
     }
 
-    @Override
     public <E> E findBy(Class<E> clazz, String attrName, String attrVal) {
         EntityManager em = getFactory().createEntityManager();
         CriteriaBuilder cb = em.getCriteriaBuilder();
@@ -140,19 +121,13 @@ public class GenericDao implements GenericDaoI {
         return list.get(0);
     }
 
-    @Override
     public <E> List<E> getByProperty(String property, Object value, Class<E> clazz) {
         String queryString = "SELECT e FROM " + clazz.getSimpleName()+ " e WHERE e." + property + " = :value";
         return getEntityManager().createQuery(queryString).setParameter("value", value).getResultList();
     }
 
-    @Override
     public <E> E getById(Long id, Class<E> clazz) {
         return (E) ((Session) getEntityManager().getDelegate()).load(clazz, id);
     }
     
-    public <E> List<E> getManyToMany (Long id){
-        //return getEntityManager().createQuery("select film from Film film inner join film.actors actor where actor.id = :value").setParameter("value", id).getResultList();
-        return getEntityManager().createNamedQuery("getActors").setParameter("value", id).getResultList();
-    }
 }

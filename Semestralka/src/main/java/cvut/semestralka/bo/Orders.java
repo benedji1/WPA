@@ -10,7 +10,7 @@ import javax.persistence.NamedQuery;
 import javax.persistence.Table;
 
 @Entity
-@NamedQuery(name = "getOrders",query = "select o from Orders o inner join o.films film where film.id = :value")
+@NamedQuery(name = "getFilmOrders",query = "select o from Orders o inner join o.films film where film.id = :value")
 @Table(name="orders")
 public class Orders extends DomainEntity{
     

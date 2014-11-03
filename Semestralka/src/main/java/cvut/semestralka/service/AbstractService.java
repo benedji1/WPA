@@ -1,23 +1,32 @@
 package cvut.semestralka.service;
 
 import cvut.semestralka.dao.GenericDao;
-import cvut.semestralka.dao.GenericDaoI;
-import cvut.semestralka.dao.ManyToManyDaoI;
+import cvut.semestralka.dao.ManyToManyDao;
 
 public abstract class AbstractService {
     
-    protected GenericDaoI dao;
-    private ManyToManyDaoI mdao;
+    protected GenericDao dao;
+    protected ManyToManyDao mdao;
 
     public AbstractService() {
         this.dao = GenericDao.getDao();
+        this.mdao=ManyToManyDao.getDao();
     }
 
-    public GenericDaoI getDao() {
+    public GenericDao getDao() {
         return dao;
     }
 
-    public void setDao(GenericDaoI dao) {
+    public void setDao(GenericDao dao) {
         this.dao = dao;
     }
+
+    public ManyToManyDao getManyToManyDao() {
+        return mdao;
+    }
+
+    public void setManyToManyDao(ManyToManyDao mdao) {
+        this.mdao = mdao;
+    }
+    
 }
