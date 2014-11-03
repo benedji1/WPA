@@ -13,5 +13,5 @@ public interface GenericDaoI {
     public <E> E findBy(Class<E> clazz, String attrName, String attrVal);
     public <E> List<E> getByProperty(String property, Object value, Class<E> clazz);
     public <E> E getById(Long id, Class<E> clazz);
-    
+    public <E> List<E> getManyToMany(Long id);
 }

@@ -5,14 +5,19 @@ import javax.persistence.Entity;
 import javax.persistence.JoinColumn;
 import javax.persistence.JoinTable;
 import javax.persistence.ManyToMany;
+import javax.persistence.NamedQuery;
 
 @Entity
-public class Actor extends DomainEntity{
+@NamedQuery(name = "getActors",query = "select actor from Actor actor inner join actor.films film where film.id = :value")
+public class Actor extends DomainEntity {
+
     protected String first_name, last_name;
-    
+
     @ManyToMany
-    @JoinTable(name="actor_film", joinColumns={@JoinColumn(name="id_actor", referencedColumnName = "id")},
-            inverseJoinColumns = {@JoinColumn(name="id_film", referencedColumnName = "id")})
+    @JoinTable(name = "actor_film", joinColumns = {
+        @JoinColumn(name = "id_actor", referencedColumnName = "id")},
+            inverseJoinColumns = {
+                @JoinColumn(name = "id_film", referencedColumnName = "id")})
     protected List<Film> films;
 
     public String getFirst_name() {
@@ -38,6 +43,5 @@ public class Actor extends DomainEntity{
     public void setFilms(List<Film> films) {
         this.films = films;
     }
-    
-    
+
 }

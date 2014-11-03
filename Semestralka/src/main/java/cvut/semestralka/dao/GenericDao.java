@@ -150,5 +150,9 @@ public class GenericDao implements GenericDaoI {
     public <E> E getById(Long id, Class<E> clazz) {
         return (E) ((Session) getEntityManager().getDelegate()).load(clazz, id);
     }
-
+    
+    public <E> List<E> getManyToMany (Long id){
+        //return getEntityManager().createQuery("select film from Film film inner join film.actors actor where actor.id = :value").setParameter("value", id).getResultList();
+        return getEntityManager().createNamedQuery("getActors").setParameter("value", id).getResultList();
+    }
 }

@@ -1,6 +1,8 @@
 package cvut.semestralka;
 
+import cvut.semestralka.bo.Actor;
 import cvut.semestralka.bo.Director;
+import cvut.semestralka.bo.DomainEntity;
 import cvut.semestralka.bo.Employee;
 import cvut.semestralka.bo.Film;
 import cvut.semestralka.dao.GenericDao;
@@ -12,8 +14,13 @@ import cvut.semestralka.dto.OrderDTO;
 import cvut.semestralka.service.EmployeeService;
 import cvut.semestralka.service.FilmService;
 import cvut.semestralka.service.OrderService;
+import java.security.DomainCombiner;
 import java.util.ArrayList;
 import java.util.List;
+import org.hibernate.SQLQuery;
+import org.hibernate.Session;
+import org.hibernate.SessionFactory;
+import org.hibernate.internal.SessionFactoryImpl;
 
 public class Main {
 
@@ -66,10 +73,16 @@ public class Main {
 //            System.out.println(o.getId());
 //        }
         //seznam vsech zakazek od zakaznika
-        OrderService os = new OrderService();
-        List<OrderDTO> orders = os.getAllCreatedOrders(10L);
-        for(OrderDTO o : orders){
-            System.out.println(o.getId());
+//        OrderService os = new OrderService();
+//        List<OrderDTO> orders = os.getAllCreatedOrders(10L);
+//        for(OrderDTO o : orders){
+//            System.out.println(o.getId());
+//        }
+        GenericDaoI gd = GenericDao.getDao();
+        List<Actor> ent= gd.getManyToMany(6L);
+        for(Actor a : ent){
+            System.out.println(a.getFirst_name());
         }
+        
     }
 }

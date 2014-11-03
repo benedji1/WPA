@@ -24,8 +24,8 @@ public class Customer extends User{
     protected String email;
     protected String password;
     
-    @OneToMany(targetEntity = Order.class, mappedBy="customer")
-    protected List<Order> orders;
+    @OneToMany(targetEntity = Orders.class, mappedBy="customer")
+    protected List<Orders> orders;
 
     public String getEmail() {
         return email;

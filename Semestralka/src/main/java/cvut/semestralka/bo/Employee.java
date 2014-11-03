@@ -14,8 +14,8 @@ public class Employee extends User{
     protected String address;
     protected String position;
     
-    @OneToMany(targetEntity = Order.class, mappedBy="employee")
-    protected List<Order> orders;
+    @OneToMany(targetEntity = Orders.class, mappedBy="employee")
+    protected List<Orders> orders;
     
     public String getAddress() {
         return address;
@@ -33,11 +33,11 @@ public class Employee extends User{
         this.position = position;
     }
 
-    public List<Order> getOrders() {
+    public List<Orders> getOrders() {
         return orders;
     }
 
-    public void setOrders(List<Order> orders) {
+    public void setOrders(List<Orders> orders) {
         this.orders = orders;
     }
 }

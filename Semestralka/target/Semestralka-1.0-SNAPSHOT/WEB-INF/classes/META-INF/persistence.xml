@@ -5,10 +5,10 @@
     <class>cvut.semestralka.bo.Actor</class>
     <class>cvut.semestralka.bo.Customer</class>
     <class>cvut.semestralka.bo.Director</class>
-    <class>cvut.semestralka.bo.Order</class>
     <class>cvut.semestralka.bo.Film</class>
     <class>cvut.semestralka.bo.Employee</class>
     <class>cvut.semestralka.bo.User</class>
+    <class>cvut.semestralka.bo.Orders</class>
     <exclude-unlisted-classes>false</exclude-unlisted-classes>
     <properties>
       <property name="javax.persistence.jdbc.url" value="jdbc:postgresql://krizik.felk.cvut.cz:5434/wpa2014zs_102_5"/>

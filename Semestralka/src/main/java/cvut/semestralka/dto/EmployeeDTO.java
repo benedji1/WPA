@@ -1,6 +1,6 @@
 package cvut.semestralka.dto;
 
-import cvut.semestralka.bo.Order;
+import cvut.semestralka.bo.Orders;
 import java.util.List;
 
 public class EmployeeDTO extends UserDTO {
