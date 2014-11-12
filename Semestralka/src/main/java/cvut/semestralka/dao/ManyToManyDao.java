@@ -2,21 +2,14 @@ package cvut.semestralka.dao;
 
 import cvut.semestralka.bo.DomainEntity;
 import java.util.List;
+import org.springframework.stereotype.Component;
 
 /**
  *
  * @author Koulas
  */
+@Component("mtmDao")
 public class ManyToManyDao extends AbstractDao {
-
-    private static ManyToManyDao mtmDao;
-
-    public static ManyToManyDao getDao() {
-        if (mtmDao == null) {
-            mtmDao = new ManyToManyDao();
-        }
-        return mtmDao;
-    }
 
     // vrati vsechny herce kteri hraji ve silmu s id idFilm
     public <E> List<E> getFilmActors(Long idFilm) {

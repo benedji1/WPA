@@ -11,22 +11,17 @@ import cvut.semestralka.bo.Film;
 import cvut.semestralka.dto.FilmDTO;
 import java.util.ArrayList;
 import java.util.List;
+import org.springframework.stereotype.Component;
+import org.springframework.transaction.annotation.Transactional;
 
 /**
  *
  * @author Jirka
  */
+@Transactional
+@Component
 public class FilmService extends AbstractService {
-
-    private static FilmService filmService;
-
-    public static FilmService getFilmService() {
-        if (filmService == null) {
-            filmService = new FilmService();
-        }
-        return filmService;
-    }
-
+    @Transactional(readOnly = true)
     public List<FilmDTO> getAllFilms() {
         List<Film> films = dao.getAll(Film.class);
         List<FilmDTO> filmsDTO = new ArrayList<FilmDTO>();
@@ -48,7 +43,7 @@ public class FilmService extends AbstractService {
     public Long deleteFilm(FilmDTO film) {
         return dao.remove(Film.class, film.getId());
     }
-
+    @Transactional(readOnly = true)
     public List<FilmDTO> getDirectorsFilms(Long directorId) {
         List<Film> films = dao.getByProperty("director", dao.getById(directorId, Director.class), Film.class);
         List<FilmDTO> filmsDto = new ArrayList<FilmDTO>();
@@ -57,7 +52,7 @@ public class FilmService extends AbstractService {
         }
         return filmsDto;
     }
-
+@Transactional(readOnly = true)
     public List<FilmDTO> getActorsFilms(Long actorId) {
         List<Film> films = mdao.getActorFilms(actorId);  
         List<FilmDTO> fdtos = new ArrayList<FilmDTO>();
@@ -67,6 +62,7 @@ public class FilmService extends AbstractService {
         return fdtos;
     }
 
+    @Transactional(readOnly = true)
     public List<FilmDTO> getFilmsInOrder(Long orderId) {
         List<Film> films = mdao.getOrderFilms(orderId);
         List<FilmDTO> fdtos = new ArrayList<FilmDTO>();
@@ -86,7 +82,7 @@ public class FilmService extends AbstractService {
             film.setDirector(director);
             Film saved = dao.saveOrUpdate(film);
             FilmDTO updated = new FilmDTO(saved.getRelease_year(), saved.getTitle(), saved.getId());
-            DirectorService.getDirectorService().addFilm(updated, director.getId());
+            new DirectorService().addFilm(updated, director.getId());
             return updated;
         }
     }
@@ -102,7 +98,7 @@ public class FilmService extends AbstractService {
             actors.add(actor);
             Film saved = dao.saveOrUpdate(film);
             FilmDTO updated = new FilmDTO(saved.getRelease_year(), saved.getTitle(), saved.getId());
-            ActorService.getActorService().addFilm(updated, actor.getId());
+            new ActorService().addFilm(updated, actor.getId());
             return updated;
         }
     }

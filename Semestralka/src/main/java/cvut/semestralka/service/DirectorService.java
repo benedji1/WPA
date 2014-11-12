@@ -11,22 +11,18 @@ import cvut.semestralka.dto.DirectorDTO;
 import cvut.semestralka.dto.FilmDTO;
 import java.util.ArrayList;
 import java.util.List;
+import org.springframework.stereotype.Component;
+import org.springframework.transaction.annotation.Transactional;
 
 /**
  *
  * @author Jirka
  */
+@Transactional
+@Component
 public class DirectorService extends AbstractService {
 
-    private static DirectorService directorService;
-
-    public static DirectorService getDirectorService() {
-        if (directorService == null) {
-            directorService = new DirectorService();
-        }
-        return directorService;
-    }
-
+    @Transactional(readOnly = true)
     public List<DirectorDTO> getAllDirectors() {
         List<Director> directors = dao.getAll(Director.class);
         List<DirectorDTO> directorsDto = new ArrayList<DirectorDTO>();

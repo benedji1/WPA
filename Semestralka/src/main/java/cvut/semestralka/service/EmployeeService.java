@@ -6,18 +6,14 @@ import cvut.semestralka.dto.EmployeeDTO;
 import cvut.semestralka.tools.Tools;
 import java.util.ArrayList;
 import java.util.List;
+import org.springframework.stereotype.Component;
+import org.springframework.transaction.annotation.Transactional;
 
+@Transactional
+@Component
 public class EmployeeService extends AbstractService {
 
-    private static EmployeeService employeeService;
-
-    private static EmployeeService getEmployeeService() {
-        if (employeeService == null) {
-            employeeService = new EmployeeService();
-        }
-        return employeeService;
-    }
-
+    @Transactional(readOnly = true)
     public List<EmployeeDTO> getAllEmployees() {
         List<Employee> employees = dao.getAll(Employee.class);
         List<EmployeeDTO> dtos = new ArrayList<EmployeeDTO>();
@@ -46,8 +42,7 @@ public class EmployeeService extends AbstractService {
     public Long deleteEmployee(EmployeeDTO employeeDTO) {
         return dao.remove(Employee.class, employeeDTO.getId());
     }
-    
-    
+
     /*
      dalsi metody...
      */

@@ -57,11 +57,11 @@ public class Main {
 //            GenericDao.getDao().saveOrUpdate(f);
 //        }
 //          seznam filmu od rezisera 21
-//        FilmService fs = new FilmService();
-//        List<FilmDTO> films = fs.getDirectorsFilms(21L);
-//        for(FilmDTO f : films){
-//            System.out.println(f.getTitle());
-//        }
+        FilmService fs = new FilmService();
+        List<FilmDTO> films = fs.getDirectorsFilms(21L);
+        for(FilmDTO f : films){
+            System.out.println(f.getTitle());
+        }
 //        sezmam filmu ve kterych hral herec s id 1
 //        FilmService fs = new FilmService();
 //        List<FilmDTO> films = fs.getActorsFilms(1L);
@@ -80,13 +80,13 @@ public class Main {
 //        for(OrderDTO o : orders){
 //            System.out.println(o.getId());
 //        }
-        ActorService as = ActorService.getActorService();
-        FilmService fs = FilmService.getFilmService();
-        OrderService os = OrderService.getOrderService();
-        List<OrderDTO> ent= os.getFilmOrders(7L);
-        for(OrderDTO a : ent){
-            System.out.println(a.getId());
-        }
+//        ActorService as = ActorService.getActorService();
+//        FilmService fs = FilmService.getFilmService();
+//        OrderService os = OrderService.getOrderService();
+//        List<OrderDTO> ent= os.getFilmOrders(7L);
+//        for(OrderDTO a : ent){
+//            System.out.println(a.getId());
+//        }
         
     }
 }

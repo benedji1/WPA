@@ -8,23 +8,19 @@ package cvut.semestralka.dao;
 import javax.persistence.EntityManager;
 import javax.persistence.EntityManagerFactory;
 import javax.persistence.Persistence;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.orm.jpa.EntityManagerFactoryUtils;
 
 /**
  *
  * @author Koulas
  */
 public abstract class AbstractDao {
+    @Autowired
+    protected EntityManagerFactory entityManagerfactory;
 
-    protected static EntityManagerFactory factory;
-
-    protected static EntityManagerFactory getFactory() {
-        if (factory == null) {
-            factory = Persistence.createEntityManagerFactory("persistence_unit");
-        }
-        return factory;
-    }
-
-    protected static EntityManager getEntityManager() {
-        return getFactory().createEntityManager();
+  
+    protected EntityManager getEntityManager() {
+       return EntityManagerFactoryUtils.getTransactionalEntityManager(entityManagerfactory);
     }
 }
