@@ -11,18 +11,22 @@ import cvut.semestralka.dto.ActorDTO;
 import cvut.semestralka.dto.FilmDTO;
 import java.util.ArrayList;
 import java.util.List;
-import org.springframework.stereotype.Component;
-import org.springframework.transaction.annotation.Transactional;
 
 /**
  *
  * @author Jirka
  */
-@Transactional
-@Component
 public class ActorService extends AbstractService {
 
-    @Transactional(readOnly = true)
+    private static ActorService actorService;
+
+    public static ActorService getActorService() {
+        if (actorService == null) {
+            actorService = new ActorService();
+        }
+        return actorService;
+    }
+
     public List<ActorDTO> getAllActors() {
         List<Actor> actors = dao.getAll(Actor.class);
         List<ActorDTO> actorsDto = new ArrayList<ActorDTO>();
@@ -44,14 +48,13 @@ public class ActorService extends AbstractService {
         return dao.remove(Actor.class, actorDTO.getId());
     }
 
-    @Transactional(readOnly = true)
     public List<ActorDTO> getAllActorsFromFilm(Long filmId) {
-        List<Actor> actors = mdao.getFilmActors(filmId);
-        List<ActorDTO> adtos = new ArrayList<ActorDTO>();
-        for (Actor a : actors) {
-            adtos.add(new ActorDTO(a.getFirst_name(), a.getLast_name(), a.getId()));
-        }
-        return adtos;
+       List<Actor> actors = mdao.getFilmActors(filmId); 
+       List<ActorDTO> adtos = new ArrayList<ActorDTO>();      
+       for(Actor a : actors){
+           adtos.add(new ActorDTO(a.getFirst_name(), a.getLast_name(), a.getId()));
+       }    
+       return adtos;
     }
 
     public ActorDTO addFilm(FilmDTO updated, Long actorId) {

@@ -11,19 +11,25 @@ import cvut.semestralka.bo.Film;
 import cvut.semestralka.bo.Orders;
 import cvut.semestralka.dto.OrderDTO;
 import java.util.ArrayList;
+import java.util.Iterator;
 import java.util.List;
-import org.springframework.stereotype.Component;
-import org.springframework.transaction.annotation.Transactional;
+
 
 /**
  *
  * @author Jirka
  */
-@Transactional
-@Component
 public class OrderService extends AbstractService {
 
-    @Transactional(readOnly = true)
+    private static OrderService orderService;
+
+    public static OrderService getOrderService() {
+        if (orderService == null) {
+            orderService = new OrderService();
+        }
+        return orderService;
+    }
+
     public List<OrderDTO> getAllOrders() {
         List<Orders> orders = dao.getAll(Orders.class);
         List<OrderDTO> ordersDto = new ArrayList<OrderDTO>();
@@ -52,7 +58,6 @@ public class OrderService extends AbstractService {
         return managed;
     }
 
-    @Transactional(readOnly = true)
     public List<OrderDTO> getAllHandledOrders(Long employeeId) {
         List<Orders> orders = dao.getByProperty("employee", dao.getById(employeeId, Employee.class), Orders.class);
         List<OrderDTO> ordersDto = new ArrayList<OrderDTO>();
@@ -62,7 +67,6 @@ public class OrderService extends AbstractService {
         return ordersDto;
     }
 
-    @Transactional(readOnly = true)
     public List<OrderDTO> getAllCreatedOrders(Long customerID) {
         List<Orders> orders = dao.getByProperty("customer", dao.getById(customerID, Customer.class), Orders.class);
         List<OrderDTO> ordersDto = new ArrayList<OrderDTO>();
@@ -71,18 +75,18 @@ public class OrderService extends AbstractService {
         }
         return ordersDto;
     }
-
-    @Transactional(readOnly = true)
-    public List<OrderDTO> getFilmOrders(Long idFilm) {
-        List<Orders> orders = mdao.getFilmOrders(idFilm);
-        List<OrderDTO> odtos = new ArrayList<OrderDTO>();
+    
+    public List<OrderDTO> getFilmOrders(Long idFilm){
+        List<Orders> orders = mdao.getFilmOrders(idFilm);        
+        List<OrderDTO> odtos = new ArrayList<OrderDTO>();    
         for (Orders o : orders) {
-            odtos.add(new OrderDTO(o.getId()));
-        }
+            odtos.add(new OrderDTO(o.getId()));       
+        }    
         return odtos;
     }
-
+    
     /*
      dalsi metody...
      */
+
 }
