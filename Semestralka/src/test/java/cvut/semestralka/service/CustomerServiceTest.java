@@ -16,6 +16,7 @@ public class CustomerServiceTest extends AbstractServiceTest{
     public void testGetAllCustomers() {
         System.out.println("getAllCustomers");
         CustomerService service = new CustomerService();
+        int originalSize = service.getAllCustomers().size();
         CustomerDTO cust1 = new CustomerDTO("fn1", "ln1", "em1");
         CustomerDTO cust2 = new CustomerDTO("fn2", "ln2", "em2");
         CustomerDTO cust3 = new CustomerDTO("fn3", "ln3", "em3");
@@ -29,7 +30,7 @@ public class CustomerServiceTest extends AbstractServiceTest{
         cust5.setId(service.addCustomer(cust5, "p5"));
         
         List<CustomerDTO> customers = service.getAllCustomers();
-        assertTrue(customers.size()==5);
+        assertTrue(customers.size()==originalSize+5);
     }
 
     @Test
