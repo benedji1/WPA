@@ -1,5 +1,6 @@
 package cvut.semestralka.service;
 
+import cvut.semestralka.bo.Customer;
 import cvut.semestralka.dto.CustomerDTO;
 import java.util.List;
 import org.junit.Test;
@@ -21,11 +22,11 @@ public class CustomerServiceTest extends AbstractServiceTest{
         CustomerDTO cust4 = new CustomerDTO("fn4", "ln4", "em4");
         CustomerDTO cust5 = new CustomerDTO("fn5", "ln5", "em5");
         
-        service.addCustomer(cust1, "p1");
-        service.addCustomer(cust2, "p2");
-        service.addCustomer(cust3, "p3");
-        service.addCustomer(cust4, "p4");
-        service.addCustomer(cust5, "p5");
+        cust1.setId(service.addCustomer(cust1, "p1"));
+        cust2.setId(service.addCustomer(cust2, "p2"));
+        cust3.setId(service.addCustomer(cust3, "p3"));
+        cust4.setId(service.addCustomer(cust4, "p4"));
+        cust5.setId(service.addCustomer(cust5, "p5"));
         
         List<CustomerDTO> customers = service.getAllCustomers();
         assertTrue(customers.size()==5);
@@ -34,16 +35,16 @@ public class CustomerServiceTest extends AbstractServiceTest{
     @Test
     public void testAddCustomer() {
        CustomerService service = new CustomerService();
-       CustomerDTO customer = new CustomerDTO("fn", "ln", "email", 70L);
-       CustomerDTO expCustomer = service.addCustomer(customer, "psswd");
-       assertEquals(customer, expCustomer);     
+       CustomerDTO customer = new CustomerDTO("fn", "ln", "email");
+       Long expID = service.addCustomer(customer, "psswd");
+       assertEquals(service.getDao().getById(expID, Customer.class).getId(), expID);     
     }
 
     @Test
     public void testDeleteCustomer() {
-        CustomerDTO customerDTO = new CustomerDTO("fn", "ln", "email", 80L);
+        CustomerDTO customerDTO = new CustomerDTO("fn", "ln", "email");
         CustomerService service = new CustomerService();
-        service.addCustomer(customerDTO, "passwd");   
+        customerDTO.setId(service.addCustomer(customerDTO, "passwd"));   
         Long id = service.deleteCustomer(customerDTO);
         assertEquals(id, customerDTO.getId());
     }

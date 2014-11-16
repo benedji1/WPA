@@ -33,14 +33,14 @@ public class CustomerService extends AbstractService {
         }
         return customersDto;
     }
-    public CustomerDTO addCustomer(CustomerDTO customerDTO, String password){
+    public Long addCustomer(CustomerDTO customerDTO, String password){
         Customer customer = new Customer();
         customer.setEmail(customerDTO.getEmail());
         customer.setFirstName(customerDTO.getFirst_name());
         customer.setLastName(customerDTO.getLast_name());
         customer.setPassword(password);
         Customer saved = dao.saveOrUpdate(customer);
-        return new CustomerDTO(saved.getFirstName(), saved.getLastName(), saved.getEmail(), saved.getId());
+        return saved.getId();
     }
     
     public Long deleteCustomer(CustomerDTO customerDTO){
