@@ -1,6 +1,7 @@
 package cvut.semestralka.bo;
 
 import java.util.List;
+import javax.persistence.CascadeType;
 import javax.persistence.Entity;
 import javax.persistence.OneToMany;
 
@@ -8,7 +9,7 @@ import javax.persistence.OneToMany;
 public class Director extends DomainEntity{
     protected String first_name, last_name;
     
-    @OneToMany(targetEntity = Film.class, mappedBy = "director")
+    @OneToMany(targetEntity = Film.class, mappedBy = "director", cascade = CascadeType.REMOVE)
     protected List<Film> films;
 
     public String getFirst_name() {

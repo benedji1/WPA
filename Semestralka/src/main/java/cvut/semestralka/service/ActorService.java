@@ -36,12 +36,12 @@ public class ActorService extends AbstractService {
         return actorsDto;
     }
 
-    public ActorDTO addActor(ActorDTO actorDto) {
+    public Long addActor(ActorDTO actorDto) {
         Actor actor = new Actor();
         actor.setFirst_name(actorDto.getFirst_name());
         actor.setLast_name(actorDto.getLast_name());
         Actor added = dao.saveOrUpdate(actor);
-        return new ActorDTO(added.getFirst_name(), added.getLast_name(), added.getId());
+        return added.getId();
     }
 
     public Long deleteActor(ActorDTO actorDTO) {

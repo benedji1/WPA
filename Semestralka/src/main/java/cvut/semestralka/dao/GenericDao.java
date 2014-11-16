@@ -89,8 +89,8 @@ public class GenericDao extends AbstractDao{
     }
 
     public <E> Long remove(Class<E> clazz, Long id) {
-        E entity = findBy(clazz, "id", id.toString());
         EntityManager manager = getEntityManager();
+        E entity = manager.find(clazz, id);
 
         manager.getTransaction().begin();
         manager.remove(entity);

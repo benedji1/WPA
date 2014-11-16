@@ -24,6 +24,12 @@ public class FilmDTO extends AbstractDTO {
         this.id = id;
     }
 
+    public FilmDTO(Integer release_year, String title) {
+        this.release_year = release_year;
+        this.title = title;
+    }
+    
+
     public Integer getRelease_year() {
         return release_year;
     }

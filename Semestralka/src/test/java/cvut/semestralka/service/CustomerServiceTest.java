@@ -15,11 +15,11 @@ public class CustomerServiceTest extends AbstractServiceTest{
     public void testGetAllCustomers() {
         System.out.println("getAllCustomers");
         CustomerService service = new CustomerService();
-        CustomerDTO cust1 = new CustomerDTO("fn1", "ln1", "em1", 1L);
-        CustomerDTO cust2 = new CustomerDTO("fn2", "ln2", "em2", 2L);
-        CustomerDTO cust3 = new CustomerDTO("fn3", "ln3", "em3", 3L);
-        CustomerDTO cust4 = new CustomerDTO("fn4", "ln4", "em4", 4L);
-        CustomerDTO cust5 = new CustomerDTO("fn5", "ln5", "em5", 5L);
+        CustomerDTO cust1 = new CustomerDTO("fn1", "ln1", "em1");
+        CustomerDTO cust2 = new CustomerDTO("fn2", "ln2", "em2");
+        CustomerDTO cust3 = new CustomerDTO("fn3", "ln3", "em3");
+        CustomerDTO cust4 = new CustomerDTO("fn4", "ln4", "em4");
+        CustomerDTO cust5 = new CustomerDTO("fn5", "ln5", "em5");
         
         service.addCustomer(cust1, "p1");
         service.addCustomer(cust2, "p2");

@@ -13,6 +13,12 @@ public class CustomerDTO extends UserDTO {
         this.email = email;
     }
 
+    public CustomerDTO(String email, String first_name, String last_name) {
+        super(first_name, last_name);
+        this.email = email;
+    }
+    
+
     public String getEmail() {
         return email;
     }

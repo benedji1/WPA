@@ -36,13 +36,12 @@ public class FilmService extends AbstractService {
         return filmsDTO;
     }
 
-    public FilmDTO saveFilm(FilmDTO filmDto) {
+    public Long saveFilm(FilmDTO filmDto) {
         Film film = new Film();
         film.setTitle(filmDto.getTitle());
         film.setRelease_year(filmDto.getRelease_year());
         Film saved = dao.saveOrUpdate(film);
-        FilmDTO savedDto = new FilmDTO(saved.getRelease_year(), saved.getTitle(), saved.getId());
-        return savedDto;
+        return saved.getId();
     }
 
     public Long deleteFilm(FilmDTO film) {
