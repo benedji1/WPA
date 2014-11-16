@@ -7,6 +7,7 @@ import javax.persistence.JoinTable;
 import javax.persistence.ManyToMany;
 import javax.persistence.ManyToOne;
 import javax.persistence.NamedQuery;
+import javax.persistence.OrderBy;
 import javax.persistence.Table;
 
 @Entity
@@ -26,6 +27,7 @@ public class Orders extends DomainEntity{
     @JoinTable(name="order_film", 
             joinColumns = {@JoinColumn(name="id_order", referencedColumnName = "id")},
             inverseJoinColumns = {@JoinColumn(name="id_film", referencedColumnName = "id")})
+    @OrderBy("title DESC")
     protected List<Film> films;
 
     public Employee getEmployee() {

@@ -4,12 +4,14 @@ import java.util.List;
 import javax.persistence.CascadeType;
 import javax.persistence.Entity;
 import javax.persistence.OneToMany;
+import javax.persistence.OrderBy;
 
 @Entity
 public class Director extends DomainEntity{
     protected String first_name, last_name;
     
     @OneToMany(targetEntity = Film.class, mappedBy = "director", cascade = CascadeType.REMOVE)
+    @OrderBy("title DESC")
     protected List<Film> films;
 
     public String getFirst_name() {

@@ -7,6 +7,7 @@ import javax.persistence.ManyToMany;
 import javax.persistence.ManyToOne;
 import javax.persistence.NamedQuery;
 import javax.persistence.NamedQueries;
+import javax.persistence.OrderBy;
 
 @Entity
 @NamedQueries({
@@ -18,9 +19,11 @@ public class Film extends DomainEntity {
     protected Integer release_year;
 
     @ManyToMany(targetEntity = Orders.class, mappedBy = "films")
+    @OrderBy("id_customer DESC")
     protected List<Orders> orders;
 
     @ManyToMany(targetEntity = Actor.class, mappedBy = "films")
+    @OrderBy("last_name DESC")
     protected List<Actor> actors;
 
     @ManyToOne

@@ -4,6 +4,7 @@ import java.util.List;
 import javax.persistence.DiscriminatorValue;
 import javax.persistence.Entity;
 import javax.persistence.OneToMany;
+import javax.persistence.OrderBy;
 import javax.persistence.Table;
 
 @Entity
@@ -15,6 +16,7 @@ public class Employee extends User{
     protected String position;
     
     @OneToMany(targetEntity = Orders.class, mappedBy="employee")
+    @OrderBy("id_employee DESC")
     protected List<Orders> orders;
     
     public String getAddress() {

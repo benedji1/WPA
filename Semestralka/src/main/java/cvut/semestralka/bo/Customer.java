@@ -10,6 +10,7 @@ import java.util.List;
 import javax.persistence.DiscriminatorValue;
 import javax.persistence.Entity;
 import javax.persistence.OneToMany;
+import javax.persistence.OrderBy;
 import javax.persistence.Table;
 
 /**
@@ -25,6 +26,7 @@ public class Customer extends User{
     protected String password;
     
     @OneToMany(targetEntity = Orders.class, mappedBy="customer")
+    @OrderBy("id_customer DESC")
     protected List<Orders> orders;
 
     public String getEmail() {

@@ -6,9 +6,10 @@ import javax.persistence.JoinColumn;
 import javax.persistence.JoinTable;
 import javax.persistence.ManyToMany;
 import javax.persistence.NamedQuery;
+import javax.persistence.OrderBy;
 
 @Entity
-@NamedQuery(name = "getFilmActors",query = "select actor from Actor actor inner join actor.films film where film.id = :value")
+@NamedQuery(name = "getFilmActors", query = "select actor from Actor actor inner join actor.films film where film.id = :value")
 public class Actor extends DomainEntity {
 
     protected String first_name, last_name;
@@ -18,6 +19,7 @@ public class Actor extends DomainEntity {
         @JoinColumn(name = "id_actor", referencedColumnName = "id")},
             inverseJoinColumns = {
                 @JoinColumn(name = "id_film", referencedColumnName = "id")})
+    @OrderBy("title DESC")
     protected List<Film> films;
 
     public String getFirst_name() {
