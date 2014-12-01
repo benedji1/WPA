@@ -31,7 +31,7 @@ public class OrderService extends AbstractService {
     }
 
     public List<OrderDTO> getAllOrders() {
-        List<Orders> orders = dao.getAll(Orders.class);
+        List<Orders> orders = genericDao.getAll(Orders.class);
         List<OrderDTO> ordersDto = new ArrayList<OrderDTO>();
         for (Orders o : orders) {
             ordersDto.add(new OrderDTO(o.getId()));
@@ -40,26 +40,26 @@ public class OrderService extends AbstractService {
     }
 
     public Long deleteOrder(OrderDTO orderDTO) {
-        return dao.remove(Orders.class, orderDTO.getId());
+        return genericDao.remove(Orders.class, orderDTO.getId());
     }
 
     public OrderDTO createOrder(Long customerId, List<Film> films) {
         Orders o = new Orders();
-        o.setCustomer(dao.getById(customerId, Customer.class));
+        o.setCustomer(genericDao.getById(customerId, Customer.class));
         o.setFilms(films);
-        OrderDTO saved = new OrderDTO(dao.saveOrUpdate(o).getId());
+        OrderDTO saved = new OrderDTO(genericDao.saveOrUpdate(o).getId());
         return saved;
     }
 
     public OrderDTO manageOrder(OrderDTO order, Long employeeId) {
         Orders o = new Orders();
-        o.setEmployee(dao.getById(employeeId, Employee.class));
-        OrderDTO managed = new OrderDTO(dao.saveOrUpdate(o).getId());
+        o.setEmployee(genericDao.getById(employeeId, Employee.class));
+        OrderDTO managed = new OrderDTO(genericDao.saveOrUpdate(o).getId());
         return managed;
     }
 
     public List<OrderDTO> getAllHandledOrders(Long employeeId) {
-        List<Orders> orders = dao.getByProperty("employee", dao.getById(employeeId, Employee.class), Orders.class);
+        List<Orders> orders = genericDao.getByProperty("employee", genericDao.getById(employeeId, Employee.class), Orders.class);
         List<OrderDTO> ordersDto = new ArrayList<OrderDTO>();
         for (Orders o : orders) {
             ordersDto.add(new OrderDTO(o.getId()));
@@ -68,7 +68,7 @@ public class OrderService extends AbstractService {
     }
 
     public List<OrderDTO> getAllCreatedOrders(Long customerID) {
-        List<Orders> orders = dao.getByProperty("customer", dao.getById(customerID, Customer.class), Orders.class);
+        List<Orders> orders = genericDao.getByProperty("customer", genericDao.getById(customerID, Customer.class), Orders.class);
         List<OrderDTO> ordersDto = new ArrayList<OrderDTO>();
         for (Orders o : orders) {
             ordersDto.add(new OrderDTO(o.getId()));
@@ -77,7 +77,7 @@ public class OrderService extends AbstractService {
     }
     
     public List<OrderDTO> getFilmOrders(Long idFilm){
-        List<Orders> orders = mdao.getFilmOrders(idFilm);        
+        List<Orders> orders = manyToManyDao.getFilmOrders(idFilm);        
         List<OrderDTO> odtos = new ArrayList<OrderDTO>();    
         for (Orders o : orders) {
             odtos.add(new OrderDTO(o.getId()));       

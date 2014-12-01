@@ -9,24 +9,17 @@ import cvut.semestralka.bo.Customer;
 import cvut.semestralka.dto.CustomerDTO;
 import java.util.ArrayList;
 import java.util.List;
+import org.springframework.stereotype.Component;
 
 /**
  *
  * @author Jirka
  */
+@Component
 public class CustomerService extends AbstractService {
 
-    private static CustomerService customerService;
-
-    public static CustomerService getCustomerService() {
-        if (customerService == null) {
-            customerService = new CustomerService();
-        }
-        return customerService;
-    }
-
     public List<CustomerDTO> getAllCustomers() {
-        List<Customer> customers = dao.getAll(Customer.class);
+        List<Customer> customers = genericDao.getAll(Customer.class);
         List<CustomerDTO> customersDto = new ArrayList<CustomerDTO>();
         for (Customer c : customers) {
             customersDto.add(new CustomerDTO(c.getFirstName(), c.getLastName(), c.getEmail(),c.getId()));
@@ -39,12 +32,12 @@ public class CustomerService extends AbstractService {
         customer.setFirstName(customerDTO.getFirst_name());
         customer.setLastName(customerDTO.getLast_name());
         customer.setPassword(password);
-        Customer saved = dao.saveOrUpdate(customer);
+        Customer saved = genericDao.saveOrUpdate(customer);
         return saved.getId();
     }
     
     public Long deleteCustomer(CustomerDTO customerDTO){
-        return dao.remove(Customer.class, customerDTO.getId());
+        return genericDao.remove(Customer.class, customerDTO.getId());
     }
     /*
     dalsi metody...

@@ -6,20 +6,13 @@ import cvut.semestralka.dto.EmployeeDTO;
 import cvut.semestralka.tools.Tools;
 import java.util.ArrayList;
 import java.util.List;
+import org.springframework.stereotype.Component;
 
+@Component
 public class EmployeeService extends AbstractService {
 
-    private static EmployeeService employeeService;
-
-    private static EmployeeService getEmployeeService() {
-        if (employeeService == null) {
-            employeeService = new EmployeeService();
-        }
-        return employeeService;
-    }
-
     public List<EmployeeDTO> getAllEmployees() {
-        List<Employee> employees = dao.getAll(Employee.class);
+        List<Employee> employees = genericDao.getAll(Employee.class);
         List<EmployeeDTO> dtos = new ArrayList<EmployeeDTO>();
 
         for (Employee employee : employees) {
@@ -38,13 +31,13 @@ public class EmployeeService extends AbstractService {
         employee.setAddress(employeeDTO.getAddress());
         employee.setPosition(employeeDTO.getPosition());
 
-        dao.saveOrUpdate(employee);
+        genericDao.saveOrUpdate(employee);
 
         return employeeDTO;
     }
 
     public Long deleteEmployee(EmployeeDTO employeeDTO) {
-        return dao.remove(Employee.class, employeeDTO.getId());
+        return genericDao.remove(Employee.class, employeeDTO.getId());
     }
     
     

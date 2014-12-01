@@ -2,20 +2,24 @@ package cvut.semestralka.dao;
 
 import cvut.semestralka.bo.DomainEntity;
 import java.util.List;
+import javax.persistence.EntityManager;
+import javax.persistence.EntityManagerFactory;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.orm.jpa.EntityManagerFactoryUtils;
+import org.springframework.stereotype.Component;
 
 /**
  *
  * @author Koulas
  */
-public class ManyToManyDao extends AbstractDao {
+@Component("manyToManyDao")
+public class ManyToManyDao {
 
-    private static ManyToManyDao mtmDao;
+    @Autowired
+    protected EntityManagerFactory entityManagerfactory;
 
-    public static ManyToManyDao getDao() {
-        if (mtmDao == null) {
-            mtmDao = new ManyToManyDao();
-        }
-        return mtmDao;
+    protected EntityManager getEntityManager() {
+        return EntityManagerFactoryUtils.getTransactionalEntityManager(entityManagerfactory); //entity manager with @Transactional support
     }
 
     // vrati vsechny herce kteri hraji ve silmu s id idFilm

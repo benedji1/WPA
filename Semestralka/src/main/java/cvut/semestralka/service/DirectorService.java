@@ -11,24 +11,17 @@ import cvut.semestralka.dto.DirectorDTO;
 import cvut.semestralka.dto.FilmDTO;
 import java.util.ArrayList;
 import java.util.List;
+import org.springframework.stereotype.Component;
 
 /**
  *
  * @author Jirka
  */
+@Component
 public class DirectorService extends AbstractService {
 
-    private static DirectorService directorService;
-
-    public static DirectorService getDirectorService() {
-        if (directorService == null) {
-            directorService = new DirectorService();
-        }
-        return directorService;
-    }
-
     public List<DirectorDTO> getAllDirectors() {
-        List<Director> directors = dao.getAll(Director.class);
+        List<Director> directors = genericDao.getAll(Director.class);
         List<DirectorDTO> directorsDto = new ArrayList<DirectorDTO>();
         for (Director d : directors) {
             directorsDto.add(new DirectorDTO(d.getFirst_name(), d.getLast_name(), d.getId()));
@@ -42,15 +35,15 @@ public class DirectorService extends AbstractService {
         director.setLast_name(directorDTO.getLast_name());
         List<Film> films = new ArrayList<Film>();
         for (Long l : directorDTO.getFilms()) {
-            films.add(dao.getById(l, Film.class));
+            films.add(genericDao.getById(l, Film.class));
         }
         director.setFilms(films);
-        Director saved = dao.saveOrUpdate(director);
+        Director saved = genericDao.saveOrUpdate(director);
         return new DirectorDTO(saved.getFirst_name(), saved.getLast_name(), saved.getId());
     }
 
     public Long deleteDirector(DirectorDTO directorDTO) {
-        return dao.remove(Director.class, directorDTO.getId());
+        return genericDao.remove(Director.class, directorDTO.getId());
     }
 
 
@@ -58,11 +51,11 @@ public class DirectorService extends AbstractService {
      dalsi metody...
      */
     public DirectorDTO addFilm(FilmDTO updated, Long directorId) {
-        Director director = dao.getById(directorId, Director.class);
+        Director director = genericDao.getById(directorId, Director.class);
         List<Film> films = director.getFilms();
-        films.add(dao.getById(updated.getId(), Film.class));
+        films.add(genericDao.getById(updated.getId(), Film.class));
         director.setFilms(films);
-        Director saved = dao.saveOrUpdate(director);
+        Director saved = genericDao.saveOrUpdate(director);
         return new DirectorDTO(saved.getFirst_name(), saved.getLast_name(), saved.getId());
     }
 }

@@ -2,31 +2,33 @@ package cvut.semestralka.service;
 
 import cvut.semestralka.dao.GenericDao;
 import cvut.semestralka.dao.ManyToManyDao;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.transaction.annotation.Transactional;
 
+@Transactional
 public abstract class AbstractService {
     
-    protected GenericDao dao;
-    protected ManyToManyDao mdao;
+    @Autowired
+    protected GenericDao genericDao;
+    @Autowired
+    protected ManyToManyDao manyToManyDao;
 
     public AbstractService() {
-        this.dao = GenericDao.getDao();
-        this.mdao=ManyToManyDao.getDao();
     }
 
-    public GenericDao getDao() {
-        return dao;
+    public GenericDao getGenericDao() {
+        return genericDao;
     }
 
-    public void setDao(GenericDao dao) {
-        this.dao = dao;
+    public void setGenericDao(GenericDao genericDao) {
+        this.genericDao = genericDao;
     }
 
     public ManyToManyDao getManyToManyDao() {
-        return mdao;
+        return manyToManyDao;
     }
 
     public void setManyToManyDao(ManyToManyDao mdao) {
-        this.mdao = mdao;
-    }
-    
+        this.manyToManyDao = mdao;
+    } 
 }
