@@ -1,0 +1,33 @@
+/* 
+    Document   : web-style
+    Created on : 3.12.2014, 8:26:04
+    Author     : Bogdan Kostov <bogdan.kostov@fel.cvut.cz>
+    Description:
+        Purpose of the stylesheet follows.
+*/
+#page{
+    text-align: center;
+}
+#header{
+    height: 10vh;
+    margin: 1vh;
+    border: 1px solid #000;
+    border-color: hotpink;
+    background-color: hotpink;
+}
+#content{
+    height: 73.5vh;
+    margin: 1vh;
+    border: 1px solid #000;
+
+}
+#footer{
+    height: 10vh;
+    margin: 1vh;
+    border: 1px solid #000;
+}
+p{
+    text-align: left;
+    margin: 10px;
+}
+

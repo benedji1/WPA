@@ -16,7 +16,11 @@
         <locale-config>
             <default-locale>en</default-locale>
             <supported-locale>cs_CZ</supported-locale>
-        </locale-config>
+        </locale-config>        
         <!--create a resource bundle kde jsou soubory s překlady-->
+        <resource-bundle>
+            <base-name>cvut.semestralka.prop.rental</base-name>
+            <var>msg</var>
+        </resource-bundle>
     </application>
 </faces-config>

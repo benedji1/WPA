@@ -4,18 +4,18 @@
       xmlns:h="http://java.sun.com/jsf/html"
       xmlns:f="http://java.sun.com/jsf/core"
       xmlns:ui="http://java.sun.com/jsf/facelets">
-    <f:view>
-        <h:head>
-            <title>Pujcovna</title>
-        </h:head>
+    <f:view locale="cs_CZ">
         <h:body>
-
+            <ui:composition template="../template/template.xhtml">
+                <ui:define name="content">
             <h1><h:outputText value="Vsechny filmy:"/></h1>
             <h:form>
                 <ui:repeat var="usrs" value="#{filmService.allFilms}">
-                    title : <h:outputText value="#{usrs.title}"/><br/>
-                </ui:repeat>>
+                    <p>title : <h:outputText value="#{usrs.title}"/></p>
+                </ui:repeat>
             </h:form>
+            </ui:define>
+            </ui:composition>
         </h:body>
     </f:view>
 </html>
