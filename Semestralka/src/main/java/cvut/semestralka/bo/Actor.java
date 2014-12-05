@@ -10,9 +10,7 @@ import javax.persistence.OrderBy;
 
 @Entity
 @NamedQuery(name = "getFilmActors", query = "select actor from Actor actor inner join actor.films film where film.id = :value")
-public class Actor extends DomainEntity {
-
-    protected String first_name, last_name;
+public class Actor extends Person {
 
     @ManyToMany
     @JoinTable(name = "actor_film", joinColumns = {

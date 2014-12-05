@@ -23,4 +23,28 @@
             <var>msg</var>
         </resource-bundle>
     </application>
+    
+    <navigation-rule>
+        <from-view-id>/Login/login.xhtml </from-view-id>
+        <navigation-case>
+            <display-name>Login fail</display-name>
+            <from-action>#{login.login()}</from-action>
+            <from-outcome>login_fail</from-outcome>
+            <to-view-id>/Login/loginFail.xhtml</to-view-id>
+        </navigation-case>
+        
+        <navigation-case>
+            <display-name>Employee login success</display-name>
+            <from-action>#{login.login()}</from-action>
+            <from-outcome>employee_login_success</from-outcome>
+            <to-view-id>/Employee/employeeMainPage.xhtml</to-view-id>
+        </navigation-case>
+        
+        <navigation-case>
+            <display-name>Customer login success</display-name>
+            <from-action>#{login.login()}</from-action>
+            <from-outcome>customer_login_success</from-outcome>
+            <to-view-id>/Customer/customerMainPage.xhtml</to-view-id>
+        </navigation-case>
+    </navigation-rule>
 </faces-config>

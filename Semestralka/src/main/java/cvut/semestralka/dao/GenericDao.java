@@ -27,15 +27,7 @@ public class GenericDao {
     }
 
     public <E> List<E> getAll(Class<E> clazz) {
-        EntityManager manager = getEntityManager();
-        if (entityManagerfactory == null) {
-            throw new NullPointerException("factory is null !!");
-        }
-        if(manager == null){
-            throw  new NullPointerException("manager is null !!");
-        }
-        Query query = manager.createQuery("select e from " + clazz.getSimpleName() + " e");
-        return query.getResultList();
+        return getEntityManager().createQuery("select e from " + clazz.getSimpleName() + " e").getResultList();
     }
 
     public <E extends DomainEntity> E saveOrUpdate(E instance) {

@@ -22,24 +22,35 @@ public class CustomerService extends AbstractService {
         List<Customer> customers = genericDao.getAll(Customer.class);
         List<CustomerDTO> customersDto = new ArrayList<CustomerDTO>();
         for (Customer c : customers) {
-            customersDto.add(new CustomerDTO(c.getFirstName(), c.getLastName(), c.getEmail(),c.getId()));
+            customersDto.add(new CustomerDTO(c.getFirstName(), c.getLastName(), c.getLogin(), c.getEmail(), c.getId()));
         }
         return customersDto;
     }
-    public Long addCustomer(CustomerDTO customerDTO, String password){
+
+    public Long addCustomer(CustomerDTO customerDTO, String password) {
         Customer customer = new Customer();
         customer.setEmail(customerDTO.getEmail());
         customer.setFirstName(customerDTO.getFirst_name());
         customer.setLastName(customerDTO.getLast_name());
+        customer.setLogin(customerDTO.getLogin());
         customer.setPassword(password);
         Customer saved = genericDao.saveOrUpdate(customer);
         return saved.getId();
     }
-    
-    public Long deleteCustomer(CustomerDTO customerDTO){
+
+    public Long deleteCustomer(CustomerDTO customerDTO) {
         return genericDao.remove(Customer.class, customerDTO.getId());
     }
-    /*
-    dalsi metody...
-    */
+
+    public boolean customerExists(String login, String password) {
+        boolean exists = false;
+        List<Customer> customers = genericDao.getAll(Customer.class);
+        for (Customer e : customers) {
+            if (e.getLogin().equals(login) && e.getPassword().equals(password)) {
+                exists = true;
+                break;
+            }
+        }
+        return exists;
+    }
 }

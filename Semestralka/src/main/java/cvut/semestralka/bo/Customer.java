@@ -20,9 +20,10 @@ import javax.persistence.Table;
 @Entity
 @DiscriminatorValue("Customer")
 @Table(name="customer")
-public class Customer extends User{
+public class Customer extends Person{
     
     protected String email;
+    protected String login;
     protected String password;
     
     @OneToMany(targetEntity = Orders.class, mappedBy="customer")
@@ -43,5 +44,13 @@ public class Customer extends User{
 
     public void setPassword(String password) {
         this.password = password;
+    }
+
+    public String getLogin() {
+        return login;
+    }
+
+    public void setLogin(String login) {
+        this.login = login;
     }
 }

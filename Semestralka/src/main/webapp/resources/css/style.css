@@ -5,20 +5,42 @@
     Description:
         Purpose of the stylesheet follows.
 */
-#page{
+.item{
     text-align: center;
 }
 #header{
     height: 10vh;
     margin: 1vh;
     border: 1px solid #000;
-    border-color: hotpink;
-    background-color: hotpink;
+    border-color: #BBB;
+    background-color: #BBB;
 }
+.headerButtons{
+    position: absolute;
+    right: 1.5rem;
+    top: 0.5rem;
+}
+.titleForm{
+    width: 33%;
+    display: inline-block;
+    position: relative;
+    vertical-align: top;
+    height: 70%;
+}
+
+.actors{
+    background-color: #999;
+}
+.users{
+    background-color: #DDD;
+}
+.films{
+    background-color: #BBB;
+}
+
 #content{
     height: 73.5vh;
     margin: 1vh;
-    border: 1px solid #000;
 
 }
 #footer{
@@ -29,5 +51,8 @@
 p{
     text-align: left;
     margin: 10px;
+}
+h1{
+    text-align: center;
 }
 

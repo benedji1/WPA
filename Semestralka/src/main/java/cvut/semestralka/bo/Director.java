@@ -7,9 +7,7 @@ import javax.persistence.OneToMany;
 import javax.persistence.OrderBy;
 
 @Entity
-public class Director extends DomainEntity{
-    protected String first_name, last_name;
-    
+public class Director extends Person{   
     @OneToMany(targetEntity = Film.class, mappedBy = "director", cascade = CascadeType.REMOVE)
     @OrderBy("title DESC")
     protected List<Film> films;

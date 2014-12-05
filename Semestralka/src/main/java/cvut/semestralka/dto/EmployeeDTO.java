@@ -1,18 +1,26 @@
 package cvut.semestralka.dto;
 
-import cvut.semestralka.bo.Orders;
 import java.util.List;
 
-public class EmployeeDTO extends UserDTO {
+public class EmployeeDTO extends PersonDTO {
 
-    protected String address, position;
+    protected String address, position, login;
     protected List<Long> orders;
 
-    public EmployeeDTO(String first_name, String last_name, String address, String position, List<Long> orders, Long id) {
+    public EmployeeDTO(String first_name, String last_name, String login, String address, String position, List<Long> orders, Long id) {
         super(first_name, last_name, id);
         this.address = address;
         this.position = position;
         this.orders = orders;
+        this.login=login;
+    }
+
+    public String getLogin() {
+        return login;
+    }
+
+    public void setLogin(String login) {
+        this.login = login;
     }
 
     public String getAddress() {
