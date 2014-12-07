@@ -10,7 +10,7 @@
                 <h1><h:outputText value="Logout"/> </h1>
             </ui:define>
             <ui:define name="content">
-                <p>#{login.login} was logged out</p>
+                <p>User #{login.login} was logged out</p>
                 <h:link outcome="#{login.logout()}" value="Go to main page"/>               
             </ui:define>
         </ui:composition>
