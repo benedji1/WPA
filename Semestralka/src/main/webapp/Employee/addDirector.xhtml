@@ -10,7 +10,39 @@
                 <h1><h:outputText value="Add director"/> </h1>
             </ui:define>
             <ui:define name="content">
-                
+                <table>
+                    <tr>
+                        <td>
+                            <h:outputLabel value="First name:" for="first_name"/>
+                        </td>
+                        <td>
+                            <h:inputText label="First name" id="first_name" value="#{addDirectorBean.firstName}" required="true">
+                                <f:validateLength minimum="1" maximum="80"/>       
+                            </h:inputText>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td>
+                            <h:outputLabel value="Last name:" for="last_name"/>
+                        </td>
+                        <td>
+                            <h:inputText label="Last name" id="last_name" value="#{addDirectorBean.lastName}" required="true">
+                                <f:validateLength minimum="1" maximum="80"/>       
+                            </h:inputText>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td>
+                            <h:commandButton action="#{addDirectorBean.addDirector()}" value="Add Director"/>  
+                        </td>
+                        <td>
+                            <h:link outcome="../index.xhtml" value="Main page"/>
+                        </td>
+                        <td>
+                            <h:link outcome="/Employee/employeeMainPage.xhtml" value="Back"/>
+                        </td>
+                    </tr>
+                </table>
             </ui:define>
         </ui:composition>
     </h:body>

@@ -12,25 +12,40 @@
             <ui:define name="content">
                 <h:form>
                     <h:messages/>
-                    <div>
-                        <h:outputLabel value="Release year:" for="release_year"/>
-                        <h:inputText label="Release year" id="release_year" value="#{filmBean.release_year}" required="true">
-                            <f:converter binding="#{yearConverter}"/>
-                            <f:validator binding="#{yearValidator}"/>
-                        </h:inputText>
-                    </div>
-                    <div>
-                        <h:outputLabel value="Title:" for="title"/>
-                        <h:inputText label="Title" id="title" value="#{filmBean.title}" required="true">
-                            <f:validateLength minimum="1" maximum="80"/>           
-                        </h:inputText>
-                    </div>
-                    <div>
-                        <h:commandButton action="#{filmBean.addFilm()}" value="Add film"/>               
-                    </div>
-                    <div>
-                        <h:link outcome="../index.xhtml" value="Main page"/>
-                    </div>
+                    <table>
+                        <tr>
+                            <td>
+                                <h:outputLabel value="Release year:" for="release_year"/>
+                            </td>
+                            <td>
+                                <h:inputText label="Release year" id="release_year" value="#{addFilmBean.release_year}" required="true">
+                                    <f:converter binding="#{yearConverter}"/>
+                                    <f:validator binding="#{yearValidator}"/>
+                                </h:inputText>
+                            </td>
+                        </tr>
+                        <tr>
+                            <td>
+                                <h:outputLabel value="Title:" for="title"/>
+                            </td>
+                            <td>
+                                <h:inputText label="Title" id="title" value="#{addFilmBean.title}" required="true">
+                                    <f:validateLength minimum="1" maximum="80"/>           
+                                </h:inputText>
+                            </td>
+                        </tr>
+                        <tr>
+                            <td>
+                                <h:commandButton action="#{addFilmBean.addFilm()}" value="Add film"/>  
+                            </td>
+                            <td>
+                                <h:link outcome="../index.xhtml" value="Main page"/>
+                            </td>
+                            <td>
+                                <h:link outcome="/Employee/employeeMainPage.xhtml" value="Back"/>
+                            </td>
+                        </tr>
+                    </table>
                 </h:form>
             </ui:define>
         </ui:composition>

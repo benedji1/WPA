@@ -39,7 +39,7 @@
                     <h1><h:outputText value="Movies:"/></h1>
                     <h:form>
                         <ui:repeat var="films" value="#{filmService.allFilms}">
-                            <p class="item">title : <h:outputText value="#{films.title}"/></p>
+                            <p class="item"><h:outputText value="#{films.title}"/></p>
                         </ui:repeat>
                     </h:form>
                 </div>

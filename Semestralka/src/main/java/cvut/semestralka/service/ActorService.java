@@ -1,8 +1,3 @@
-/*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
- */
 package cvut.semestralka.service;
 
 import cvut.semestralka.bo.Actor;
@@ -34,6 +29,7 @@ public class ActorService extends AbstractService {
         actor.setFirst_name(actorDto.getFirst_name());
         actor.setLast_name(actorDto.getLast_name());
         Actor added = genericDao.saveOrUpdate(actor);
+        if(added==null) throw new NullPointerException("added is null");
         return added.getId();
     }
 

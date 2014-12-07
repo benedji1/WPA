@@ -11,6 +11,10 @@ public class DirectorDTO extends PersonDTO {
         super(first_name, last_name);
         this.id = id;
     }
+    
+    public DirectorDTO(String first_name, String last_name){
+        super(first_name, last_name);
+    }
 
     public String getFirst_name() {
         return first_name;
