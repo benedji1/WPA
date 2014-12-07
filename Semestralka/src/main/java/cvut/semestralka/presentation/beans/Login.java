@@ -14,7 +14,8 @@ import org.springframework.stereotype.Component;
 @Scope(value = "session")
 public class Login {
 
-    protected String login, password, user;
+    protected String login, password, user, actualLoginMessage = "Login";
+    protected boolean logged = false;
 
     @Autowired
     EmployeeService employeeService;
@@ -30,12 +31,12 @@ public class Login {
         this.login = login;
     }
 
-    public String getPassword() {
-        return password;
-    }
-
     public void setPassword(String password) {
         this.password = password;
+    }
+
+    public String getPassword() {
+        return password;
     }
 
     public String getUser() {
@@ -48,11 +49,32 @@ public class Login {
 
     public String login() {
         if (user.equals("employee") && loginEmployee()) {
+            actualLoginMessage = "Logged as " + login;
+            logged = true;
             return "employee_login_success";
         } else if (user.equals("customer") && loginCustomer()) {
+            actualLoginMessage = "Logged as " + login;
+            logged = true;
             return "customer_login_success";
         }
+        
         return "login_fail";
+    }
+
+    public String gotoUserPage() {
+        if (logged && loginEmployee()) {
+            return "/Employee/employeeMainPage.xhtml";
+        }
+        if(logged && loginCustomer()){
+            return "/Customer/customerMainPage.xhtml";
+        }
+        else return "/Login/login.xhtml";
+    }
+    
+    public String logout(){
+        logged=false;
+        actualLoginMessage="Login";
+        return "/index.xhtml";
     }
 
     private boolean loginEmployee() {
@@ -61,5 +83,13 @@ public class Login {
 
     private boolean loginCustomer() {
         return customerService.customerExists(login, password);
+    }
+
+    public String getActualLoginMessage() {
+        return actualLoginMessage;
+    }
+
+    public void setActualLoginMessage(String actualLoginMessage) {
+        this.actualLoginMessage = actualLoginMessage;
     }
 }

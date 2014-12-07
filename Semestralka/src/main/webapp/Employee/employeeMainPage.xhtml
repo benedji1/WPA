@@ -8,7 +8,7 @@
         <h:body>
             <ui:composition template="../template/template.xhtml">
                 <ui:define name="header">
-                    <h1><h:outputText value="Employee main page"/> </h1>
+                    <h1><h:outputText value="Employee main page - #{login.actualLoginMessage}"/> </h1>
                 </ui:define>
                 <ui:define name="content">
                     <div>
@@ -22,6 +22,12 @@
                     </div>
                     <div>
                         <h:link outcome="addDirector.xhtml" value="Add director"/>
+                    </div>
+                    <div>
+                        <h:link outcome="../index.xhtml" value="Home"/>
+                    </div>
+                    <div>
+                        <h:link outcome="/Login/logout.xhtml" value="Logout"/>
                     </div>
                 </ui:define>
             </ui:composition>
