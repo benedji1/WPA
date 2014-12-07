@@ -1,0 +1,23 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!--
+To change this license header, choose License Headers in Project Properties.
+To change this template file, choose Tools | Templates
+and open the template in the editor.
+-->
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:h="http://java.sun.com/jsf/html"
+      xmlns:ui="http://java.sun.com/jsf/facelets">
+    <h:body>
+        <ui:composition template="../template/template.xhtml">    
+            <ui:define name="header">
+                <h1><h:outputText value="Authorization Failed"/> </h1>
+            </ui:define>
+            <ui:define name="content">
+                <h1>Your registration is coplete!</h1>
+                <h:outputText value="Please "/>
+                <h:link outcome="/Login/login.xhtml" value="Login"/>
+            </ui:define>
+        </ui:composition>
+    </h:body>
+</html>

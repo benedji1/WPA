@@ -1,0 +1,21 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:h="http://java.sun.com/jsf/html"
+      xmlns:f="http://java.sun.com/jsf/core"
+      xmlns:ui="http://java.sun.com/jsf/facelets">
+    <f:view locale="cs_CZ">
+        <h:body>
+            <ui:composition template="../template/template.xhtml">
+                <ui:define name="content">
+            <h1><h:outputText value="Vsechny filmy:"/></h1>
+            <h:form>
+                <ui:repeat var="usrs" value="#{filmService.allFilms}">
+                    <p>title : <h:outputText value="#{usrs.title}"/></p>
+                </ui:repeat>
+            </h:form>
+            </ui:define>
+            </ui:composition>
+        </h:body>
+    </f:view>
+</html>

@@ -57,7 +57,13 @@ public class RegisterCustomer {
         this.login = login;
     }
     public String registerCustomer(){
-        customerService.addCustomer(new CustomerDTO(first_name, last_name, login, email), password);
+        CustomerDTO cdto = new CustomerDTO(first_name, last_name, login, email);
+        for(CustomerDTO c : customerService.getAllCustomers()){
+            if(c.getLogin().equals(cdto.getLogin())){
+                return "bad_login";
+            }
+        }
+        customerService.addCustomer(cdto, password);
         return "success";
     }
 }
