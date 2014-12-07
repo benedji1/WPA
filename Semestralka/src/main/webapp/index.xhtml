@@ -10,7 +10,7 @@
                 <h1><h:outputText value="#{msg['rental-welcome']}"/> </h1>
                 <div class="headerButtons">
                     <p><h:link outcome="/Customer/registerCustomer.xhtml" value="Register"/></p>
-                    <p><h:link outcome="/Login/login.xhtml" value="Login"/></p>
+                    <p><h:link outcome="#{login.gotoUserPage()}" value="#{login.actualLoginMessage}"/></p>
                     <h:form>
 
                         <h:panelGrid columns="2">

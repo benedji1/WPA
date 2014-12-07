@@ -1,0 +1,18 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:h="http://java.sun.com/jsf/html"
+      xmlns:ui="http://java.sun.com/jsf/facelets"
+      xmlns:f="http://java.sun.com/jsf/core">
+    <h:body>
+        <ui:composition template="../template/template.xhtml">           
+            <ui:define name="header">
+                <h1><h:outputText value="Logout"/> </h1>
+            </ui:define>
+            <ui:define name="content">
+                <p>User #{login.login} was logged out</p>
+                <h:link outcome="#{login.logout()}" value="Go to main page"/>               
+            </ui:define>
+        </ui:composition>
+    </h:body>
+</html>

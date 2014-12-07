@@ -14,7 +14,8 @@ import org.springframework.stereotype.Component;
 @Scope(value = "session")
 public class Login {
 
-    protected String login, password, user;
+    protected String login, password, user, actualLoginMessage = "Login";
+    protected boolean logged = false;
     public static boolean isAdmin = false;
 
     @Autowired
@@ -47,15 +48,44 @@ public class Login {
         this.user = user;
     }
     
-    public String login() {
+   public String login() {
         if (user.equals("employee") && loginEmployee()) {
+            actualLoginMessage = "Logged as " + login;
+            logged = true;
             return "employee_login_success";
         } else if (user.equals("customer") && loginCustomer()) {
+            actualLoginMessage = "Logged as " + login;
+            logged = true;
             return "customer_login_success";
         }
+        
         return "login_fail";
     }
 
+    public String gotoUserPage() {
+        if (logged && loginEmployee()) {
+            return "/Employee/employeeMainPage.xhtml";
+        }
+        if(logged && loginCustomer()){
+            return "/Customer/customerMainPage.xhtml";
+        }
+        else return "/Login/login.xhtml";
+    }
+    
+    public String logout(){
+        logged=false;
+        actualLoginMessage="Login";
+        return "/index.xhtml";
+    }
+
+    public String getActualLoginMessage() {
+        return actualLoginMessage;
+    }
+
+    public void setActualLoginMessage(String actualLoginMessage) {
+        this.actualLoginMessage = actualLoginMessage;
+    }
+    
     private boolean loginEmployee() {
         isAdmin = employeeService.isAdmin(login);
         return employeeService.employeeExists(login, password);
