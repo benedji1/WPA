@@ -15,6 +15,13 @@ public class EmployeeDTO extends PersonDTO {
         this.login=login;
     }
 
+    public EmployeeDTO(String address, String position, String login, String first_name, String last_name) {
+        super(first_name, last_name);
+        this.address = address;
+        this.position = position;
+        this.login = login;
+    }
+    
     public String getLogin() {
         return login;
     }

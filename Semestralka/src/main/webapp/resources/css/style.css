@@ -6,10 +6,11 @@
         Purpose of the stylesheet follows.
 */
 .item{
-    text-align: center;
+    text-align: left;
+    margin: 1.5vh;
 }
 #header{
-    height: 10vh;
+    height: 12vh;
     margin: 1vh;
     border: 1px solid #000;
     border-color: #BBB;
@@ -17,15 +18,15 @@
 }
 .headerButtons{
     position: absolute;
-    right: 1.5rem;
+    right: 2.5rem;
     top: 0.5rem;
 }
 .titleForm{
-    width: 33%;
+    width: 33.13%;
     display: inline-block;
     position: relative;
     vertical-align: top;
-    height: 70%;
+    height: 100%;
 }
 
 .actors{
@@ -44,15 +45,31 @@
 
 }
 #footer{
-    height: 10vh;
+    line-height: 8vh;
+    height: 8vh;
     margin: 1vh;
-    border: 1px solid #000;
+    border-color: #BBB;
+    background-color: #BBB;
+}
+.homeButton{
+    position: absolute;
+    left: 3vh;
+    top: 1.5vh;
 }
 p{
     text-align: left;
-    margin: 10px;
+    margin: 3px;
 }
 h1{
     text-align: center;
 }
-
+#footer h3 {
+    vertical-align:middle;
+    text-align: center;
+}
+tr{
+    width: 200px;
+}
+td{
+    width: 100px;
+}

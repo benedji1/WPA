@@ -1,0 +1,41 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:h="http://java.sun.com/jsf/html"
+      xmlns:f="http://java.sun.com/jsf/core"
+      xmlns:ui="http://java.sun.com/jsf/facelets">
+        <h:body>
+            <ui:composition template="../template/template.xhtml">
+                <ui:define name="header">
+                    <div class="homeButton">
+                        <p><h:link outcome="/index.xhtml" value="Home"/></p>
+                    </div>
+                    <h1><h:outputText value="Login"/> </h1>                    
+                </ui:define>
+                <ui:define name="content">
+                    <h:form>
+                        <h:messages/>
+                        <div>
+                            <h:selectOneRadio value="#{login.user}">
+                                <f:selectItem itemValue="employee" itemLabel="Employee"/>
+                                <f:selectItem itemValue="customer" itemLabel="Customer"/>
+                            </h:selectOneRadio>
+                        </div>
+                        <table>
+                            <tr>
+                                <td><h:outputLabel value="Login" for="login"/></td>
+                                <td><h:inputText label="Login" id="login" value="#{login.login}" required="true"/></td>
+                            </tr>
+                            <tr>
+                                <td><h:outputLabel value="Password" for="password"/></td>
+                                <td><h:inputSecret label="Password" id="password" value="#{login.password}" required="true"/></td>
+                            </tr>
+                        </table>
+                        <br/>
+                        <h:commandButton action="#{login.login()}" value="Login"/><br/><br/>
+                        <h:link outcome="../index.xhtml" value="Back"/>
+                    </h:form>
+                </ui:define>
+            </ui:composition>
+        </h:body>
+</html>

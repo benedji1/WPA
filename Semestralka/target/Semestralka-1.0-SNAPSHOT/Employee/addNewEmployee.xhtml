@@ -1,0 +1,53 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:h="http://java.sun.com/jsf/html"
+      xmlns:ui="http://java.sun.com/jsf/facelets"
+      xmlns:f="http://java.sun.com/jsf/core">
+    <h:body>
+        <ui:composition template="../template/template.xhtml">    
+            <ui:define name="header">
+                <h1><h:outputText value="Add new employee"/> </h1>
+            </ui:define>
+            <ui:define name="content">
+                <h:form>
+                    <table>
+                        <tr>
+                            <td><h:outputLabel value="First name:" for="firstName"/></td>
+                            <td><h:inputText label="First name" id="first_name" value="#{addNewEmployee.firstName}" required="true">
+                                    <f:validateLength maximum="120" minimum="2"/>             
+                                </h:inputText></td>
+                        </tr>
+                        <tr>
+                            <td><h:outputLabel value="Last name:" for="lastName"/></td>
+                            <td><h:inputText label="Last name" id="last_name" value="#{addNewEmployee.lastName}" required="true">
+                                    <f:validateLength maximum="150" minimum="2"/>             
+                                </h:inputText></td>
+                        </tr>
+                        <tr>
+                            <td><h:outputLabel value="Login" for="logins"/></td>
+                            <td><h:inputText label="Login" id="EmployeeLogin" value="#{addNewEmployee.login}" required="true">
+                                    <f:validateLength maximum="60" minimum="5"/>             
+                                </h:inputText></td>
+                        </tr>
+                        <tr>
+                            <td><h:outputLabel value="Password" for="password"/></td>
+                            <td><h:inputSecret label="Password" id="EmployeePassword" value="#{addNewEmployee.password}" required="true">
+                                    <f:validateLength maximum="60" minimum="8"/> 
+                                </h:inputSecret></td>
+                        </tr>
+                        <tr>
+                            <td><h:outputLabel value="Address" for="address"/></td>
+                            <td><h:inputText label="Address" id="address" value="#{addNewEmployee.address}" required="true"/></td>
+                        </tr>
+                        <tr>
+                            <td><h:outputLabel value="Position" for="position"/></td>
+                            <td><h:inputText label="Position" id="position" value="#{addNewEmployee.position}" required="true"/></td>
+                        </tr>
+                    </table>
+                    <h:commandButton action="#{addNewEmployee.addEmployee()}" value="Create"/><br/><br/>
+                </h:form>
+            </ui:define>
+        </ui:composition>
+    </h:body>
+</html>

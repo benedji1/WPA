@@ -2,14 +2,28 @@
 <!DOCTYPE html>
 <html xmlns="http://www.w3.org/1999/xhtml"
       xmlns:h="http://java.sun.com/jsf/html"
-      xmlns:ui="http://java.sun.com/jsf/facelets">
+      xmlns:ui="http://java.sun.com/jsf/facelets"
+      xmlns:f="http://java.sun.com/jsf/core">
     <h:body>
         <ui:composition template="template/template.xhtml">           
             <ui:define name="header">
-                <h1><h:outputText value="#{msg['rental-welcome.title']}"/> </h1>
+                <h1><h:outputText value="#{msg['rental-welcome']}"/> </h1>
                 <div class="headerButtons">
-                <p><h:link outcome="/Customer/registerCustomer.xhtml" value="Register"/></p>
-                <p><h:link outcome="#{login.gotoUserPage()}" disabled="false" value="#{login.actualLoginMessage}"/></p>
+                    <p><h:link outcome="/Customer/registerCustomer.xhtml" value="Register"/></p>
+                    <p><h:link outcome="/Login/login.xhtml" value="Login"/></p>
+                    <h:form>
+
+                        <h:panelGrid columns="2">
+
+                            <h:outputText value="#{msg['language']}" />
+                            <h:selectOneMenu value="#{language.localeCode}" onchange="submit()"
+                                             valueChangeListener="#{language.countryLocaleCodeChanged}">
+                                <f:selectItems value="#{language.countriesInMap}" /> 
+                            </h:selectOneMenu>
+
+                        </h:panelGrid>
+
+                    </h:form>
                 </div>
             </ui:define>
             <ui:define name="content">
@@ -25,7 +39,7 @@
                     <h1><h:outputText value="Movies:"/></h1>
                     <h:form>
                         <ui:repeat var="films" value="#{filmService.allFilms}">
-                            <p class="item"><h:outputText value="#{films.title}"/></p>
+                            <p class="item">title : <h:outputText value="#{films.title}"/></p>
                         </ui:repeat>
                     </h:form>
                 </div>

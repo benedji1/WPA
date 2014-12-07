@@ -15,7 +15,8 @@
                     <div>
                         <h:outputLabel value="Release year:" for="release_year"/>
                         <h:inputText label="Release year" id="release_year" value="#{filmBean.release_year}" required="true">
-                            <f:validateLongRange minimum="1850" maximum="2015"/>             
+                            <f:converter binding="#{yearConverter}"/>
+                            <f:validator binding="#{yearValidator}"/>
                         </h:inputText>
                     </div>
                     <div>
