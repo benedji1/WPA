@@ -24,22 +24,26 @@ public class DirectorService extends AbstractService {
         List<Director> directors = genericDao.getAll(Director.class);
         List<DirectorDTO> directorsDto = new ArrayList<DirectorDTO>();
         for (Director d : directors) {
-            directorsDto.add(new DirectorDTO(d.getFirst_name(), d.getLast_name(), d.getId()));
+            directorsDto.add(new DirectorDTO(d.getFirstName(), d.getLastName(), d.getId()));
         }
         return directorsDto;
     }
 
     public DirectorDTO addDirector(DirectorDTO directorDTO) {
         Director director = new Director();
-        director.setFirst_name(directorDTO.getFirst_name());
-        director.setLast_name(directorDTO.getLast_name());
+        director.setFirstName(directorDTO.getFirst_name());
+        director.setLastName(directorDTO.getLast_name());
+        
         List<Film> films = new ArrayList<Film>();
-        for (Long l : directorDTO.getFilms()) {
-            films.add(genericDao.getById(l, Film.class));
+        
+        if (directorDTO.getFilms() != null) {
+            for (Long l : directorDTO.getFilms()) {
+                films.add(genericDao.getById(l, Film.class));
+            }
         }
         director.setFilms(films);
         Director saved = genericDao.saveOrUpdate(director);
-        return new DirectorDTO(saved.getFirst_name(), saved.getLast_name(), saved.getId());
+        return new DirectorDTO(saved.getFirstName(), saved.getLastName(), saved.getId());
     }
 
     public Long deleteDirector(DirectorDTO directorDTO) {
@@ -56,6 +60,6 @@ public class DirectorService extends AbstractService {
         films.add(genericDao.getById(updated.getId(), Film.class));
         director.setFilms(films);
         Director saved = genericDao.saveOrUpdate(director);
-        return new DirectorDTO(saved.getFirst_name(), saved.getLast_name(), saved.getId());
+        return new DirectorDTO(saved.getFirstName(), saved.getLastName(), saved.getId());
     }
 }

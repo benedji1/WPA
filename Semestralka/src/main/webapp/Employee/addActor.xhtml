@@ -7,42 +7,45 @@
     <h:body>
         <ui:composition template="../template/template.xhtml">           
             <ui:define name="header">
-                <h1><h:outputText value="Add actor"/> </h1>
+                <h1><h:outputText value="Add film"/> </h1>
             </ui:define>
             <ui:define name="content">
-                <table>
-                    <tr>
-                        <td>
-                            <h:outputLabel value="First name:" for="first_name"/>
-                        </td>
-                        <td>
-                            <h:inputText label="First name" id="first_name" value="#{addActorBean.firstName}" required="true">
-                                <f:validateLength minimum="1" maximum="80"/>       
-                            </h:inputText>
-                        </td>
-                    </tr>
-                    <tr>
-                        <td>
-                            <h:outputLabel value="Last name:" for="last_name"/>
-                        </td>
-                        <td>
-                            <h:inputText label="Last name" id="last_name" value="#{addActorBean.lastName}" required="true">
-                                <f:validateLength minimum="1" maximum="80"/>       
-                            </h:inputText>
-                        </td>
-                    </tr>
-                    <tr>
-                        <td>
-                            <h:commandButton action="#{addActorBean.addActor()}" value="Add actor"/>  
-                        </td>
-                        <td>
-                            <h:link outcome="../index.xhtml" value="Main page"/>
-                        </td>
-                        <td>
-                            <h:link outcome="/Employee/employeeMainPage.xhtml" value="Back"/>
-                        </td>
-                    </tr>
-                </table>
+                <h:form>
+                    <h:messages/>
+                    <table>
+                        <tr>
+                            <td>
+                                <h:outputLabel value="First name:" for="first_name"/>
+                            </td>
+                            <td>
+                                <h:inputText label="First name" id="first_name" value="#{addActorBean.firstName}" required="true">
+                                    
+                                </h:inputText>
+                            </td>
+                        </tr>
+                        <tr>
+                            <td>
+                                <h:outputLabel value="Last name:" for="last_name"/>
+                            </td>
+                            <td>
+                                <h:inputText label="Last name" id="last_name" value="#{addActorBean.lastName}" required="true">
+                                    <f:validateLength minimum="1" maximum="80"/>           
+                                </h:inputText>
+                            </td>
+                        </tr>
+                        <tr>
+                            <td>
+                                <h:commandButton action="#{addActorBean.addActor()}" value="Add actor"/>  
+                            </td>
+                            <td>
+                                <h:link outcome="../index.xhtml" value="Main page"/>
+                            </td>
+                            <td>
+                                <h:link outcome="/Employee/employeeMainPage.xhtml" value="Back"/>
+                            </td>
+                        </tr>
+                    </table>
+                </h:form>
             </ui:define>
         </ui:composition>
     </h:body>

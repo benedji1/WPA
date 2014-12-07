@@ -1,0 +1,35 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:h="http://java.sun.com/jsf/html"
+      xmlns:ui="http://java.sun.com/jsf/facelets"
+      xmlns:f="http://java.sun.com/jsf/core">
+    <h:body>
+        <ui:composition template="../template/template.xhtml">           
+            <ui:define name="header">
+                <h1><h:outputText value="Add film"/> </h1>
+            </ui:define>
+            <ui:define name="content">
+                <h:form>
+                    <table>
+                        <th>
+                            <tr>Surname</tr>
+                            <tr>Last name</tr>
+                            <tr>Actor's films</tr>
+                            <tr>Delete</tr>
+                        </th>
+                        <ui:repeat var="actors" value="#{addActorBean.allActors}">
+                            <tr>
+                                <td><h:outputText value="#{actors.first_name}"/></td>
+                                <td><h:outputText value="#{actors.last_name}"/></td>
+                                <td><h:link outcome="/actorsFilms.xhtml" value="films"/></td>
+                                <td><h:link outcome="/deleteActor.xhtml" value="delete"/></td>
+                                
+                            </tr>
+                        </ui:repeat>
+                    </table>
+                </h:form>
+            </ui:define>
+        </ui:composition>
+    </h:body>
+</html>

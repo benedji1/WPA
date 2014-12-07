@@ -1,10 +1,10 @@
 package cvut.semestralka.dao;
 
+import cvut.semestralka.bo.Actor;
 import cvut.semestralka.bo.DomainEntity;
 import java.util.List;
 import javax.persistence.EntityManager;
 import javax.persistence.EntityManagerFactory;
-import javax.persistence.Query;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.orm.jpa.EntityManagerFactoryUtils;
 import org.springframework.stereotype.Component;
@@ -36,6 +36,7 @@ public class GenericDao {
         } else {
             getEntityManager().merge(instance);
         }
+        System.out.println(instance.getId());
         return instance;
     }
 

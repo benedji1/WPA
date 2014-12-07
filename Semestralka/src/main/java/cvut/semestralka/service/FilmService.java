@@ -1,8 +1,3 @@
-/*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
- */
 package cvut.semestralka.service;
 
 import cvut.semestralka.bo.Actor;
@@ -64,6 +59,7 @@ public class FilmService extends AbstractService {
         }
         return fdtos;
     }
+   
 
     public List<FilmDTO> getFilmsInOrder(Long orderId) {
         List<Film> films = manyToManyDao.getOrderFilms(orderId);
@@ -78,7 +74,7 @@ public class FilmService extends AbstractService {
         Director director = genericDao.getById(directorID, Director.class);
         Film film = genericDao.getById(filmDto.getId(), Film.class);
         if (film.getDirector() != null && film.getDirector() != director) {
-            System.err.println("Film " + film.getTitle() + " allready has director " + director.getFirst_name() + " " + director.getLast_name());
+            System.err.println("Film " + film.getTitle() + " allready has director " + director.getFirstName() + " " + director.getLastName());
             return new FilmDTO(film.getRelease_year(), film.getTitle(), film.getId());
         } else {
             film.setDirector(director);
@@ -94,7 +90,7 @@ public class FilmService extends AbstractService {
         Film film = genericDao.getById(filmDto.getId(), Film.class);
         List<Actor> actors = film.getActors();
         if (actors.contains(actor)) {
-            System.err.println("Film " + film.getTitle() + " allready has actor " + actor.getFirst_name() + " " + actor.getLast_name());
+            System.err.println("Film " + film.getTitle() + " allready has actor " + actor.getFirstName() + " " + actor.getLastName());
             return new FilmDTO(film.getRelease_year(), film.getTitle(), film.getId());
         } else {
             actors.add(actor);

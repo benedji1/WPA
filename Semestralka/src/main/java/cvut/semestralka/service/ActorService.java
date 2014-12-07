@@ -19,15 +19,15 @@ public class ActorService extends AbstractService {
         List<Actor> actors = genericDao.getAll(Actor.class);
         List<ActorDTO> actorsDto = new ArrayList<ActorDTO>();
         for (Actor a : actors) {
-            actorsDto.add(new ActorDTO(a.getFirst_name(), a.getLast_name(), a.getId()));
+            actorsDto.add(new ActorDTO(a.getFirstName(), a.getLastName(), a.getId()));
         }
         return actorsDto;
     }
 
     public Long addActor(ActorDTO actorDto) {
         Actor actor = new Actor();
-        actor.setFirst_name(actorDto.getFirst_name());
-        actor.setLast_name(actorDto.getLast_name());
+        actor.setFirstName(actorDto.getFirst_name());
+        actor.setLastName(actorDto.getLast_name());
         Actor added = genericDao.saveOrUpdate(actor);
         if(added==null) throw new NullPointerException("added is null");
         return added.getId();
@@ -36,12 +36,16 @@ public class ActorService extends AbstractService {
     public Long deleteActor(ActorDTO actorDTO) {
         return genericDao.remove(Actor.class, actorDTO.getId());
     }
+    
+    public Long deleteActor(Long id){
+        return genericDao.remove(Actor.class, id);
+    }
 
     public List<ActorDTO> getAllActorsFromFilm(Long filmId) {
        List<Actor> actors = manyToManyDao.getFilmActors(filmId); 
        List<ActorDTO> adtos = new ArrayList<ActorDTO>();      
        for(Actor a : actors){
-           adtos.add(new ActorDTO(a.getFirst_name(), a.getLast_name(), a.getId()));
+           adtos.add(new ActorDTO(a.getFirstName(), a.getLastName(), a.getId()));
        }    
        return adtos;
     }
@@ -52,7 +56,7 @@ public class ActorService extends AbstractService {
         films.add(genericDao.getById(updated.getId(), Film.class));
         actor.setFilms(films);
         Actor saved = genericDao.saveOrUpdate(actor);
-        return new ActorDTO(saved.getFirst_name(), saved.getLast_name(), saved.getId());
+        return new ActorDTO(saved.getFirstName(), saved.getLastName(), saved.getId());
     }
 
     /*
