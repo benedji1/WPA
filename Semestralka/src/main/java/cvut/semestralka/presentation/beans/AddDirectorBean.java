@@ -35,7 +35,8 @@ public class AddDirectorBean {
         this.lastName = lastName;
     }
     
-    public void addDirector(){
+    public String addDirector(){
         directorService.addDirector(new DirectorDTO(firstName, lastName));
+        return "/Employee/added?faces-redirect=true";
     }
 }

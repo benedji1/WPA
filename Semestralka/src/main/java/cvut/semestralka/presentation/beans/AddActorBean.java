@@ -45,8 +45,9 @@ public class AddActorBean {
         this.id = id;
     }
     
-    public void addActor(){
+    public String addActor(){
         actorService.addActor(new ActorDTO(firstName, lastName));
+        return "/Employee/added?faces-redirect=true";
     }
     
     public void deleteActor(Long id){

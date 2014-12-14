@@ -3,29 +3,22 @@ package cvut.semestralka.dto;
 import cvut.semestralka.bo.Orders;
 import java.util.List;
 
-public class CustomerDTO extends PersonDTO {
+public class CustomerDTO extends UserDTO {
 
-    protected String email, login;
+    protected String email;
     protected List<Long> orders;
 
     public CustomerDTO(String first_name, String last_name, String login, String email, Long id) {
-        super(first_name, last_name, id);
+        super(first_name, last_name, id,login);
         this.email = email;
-        this.login=login;
+        this.roles = "CUSTOMER";
     }
 
     public CustomerDTO(String first_name, String last_name, String login, String email) {
         super(first_name, last_name);
         this.email = email;
         this.login=login;
-    }
-
-    public String getLogin() {
-        return login;
-    }
-
-    public void setLogin(String login) {
-        this.login = login;
+        this.roles = "CUSTOMER";
     }
 
     public String getEmail() {

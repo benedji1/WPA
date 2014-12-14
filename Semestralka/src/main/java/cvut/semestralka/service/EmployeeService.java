@@ -37,12 +37,17 @@ public class EmployeeService extends AbstractService {
 
     public EmployeeDTO addEmployee(EmployeeDTO employeeDTO, String password) {
         Employee employee = new Employee();
-        employee.setFirstName(employeeDTO.getFirst_name());
-        employee.setLastName(employeeDTO.getLast_name());
+        employee.setFirstName(employeeDTO.getFirstName());
+        employee.setLastName(employeeDTO.getLastName());
         employee.setAddress(employeeDTO.getAddress());
         employee.setPosition(employeeDTO.getPosition());
         employee.setLogin(employeeDTO.getLogin());
         employee.setPassword(password);
+        if(employeeDTO.getPosition().equals("Administrator")){
+            employee.setRole("ADMIN");
+        }else{
+            employee.setRole("EMPLOYEE");
+        }
         genericDao.saveOrUpdate(employee);
 
         return employeeDTO;

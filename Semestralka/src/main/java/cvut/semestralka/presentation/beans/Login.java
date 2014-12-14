@@ -2,8 +2,14 @@ package cvut.semestralka.presentation.beans;
 
 import cvut.semestralka.service.CustomerService;
 import cvut.semestralka.service.EmployeeService;
+import javax.faces.application.FacesMessage;
+import javax.faces.context.FacesContext;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Scope;
+import org.springframework.security.authentication.AuthenticationManager;
+import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
+import org.springframework.security.core.Authentication;
+import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.stereotype.Component;
 
 /**
@@ -14,10 +20,11 @@ import org.springframework.stereotype.Component;
 @Scope(value = "session")
 public class Login {
 
-    protected String login, password, user, actualLoginMessage = "Login";
+    protected String login, password, user;
     protected boolean logged = false;
-    public static boolean isAdmin = false;
-
+    @Autowired
+    private AuthenticationManager authenticationManager;
+    
     @Autowired
     EmployeeService employeeService;
 
@@ -49,49 +56,22 @@ public class Login {
     }
     
    public String login() {
-        if (user.equals("employee") && loginEmployee()) {
-            actualLoginMessage = "Logged as " + login;
-            logged = true;
-            return "employee_login_success";
-        } else if (user.equals("customer") && loginCustomer()) {
-            actualLoginMessage = "Logged as " + login;
-            logged = true;
-            return "customer_login_success";
+       Authentication request = new UsernamePasswordAuthenticationToken(login, password);
+        try {
+            Authentication result = authenticationManager.authenticate(request);
+            SecurityContextHolder.getContext().setAuthentication(result);
+        } catch (org.springframework.security.core.AuthenticationException e) {
+            FacesContext.getCurrentInstance().addMessage(null, new FacesMessage(FacesMessage.SEVERITY_WARN, "Invalid credentials!", "The username/password combination is not valid."));
+            return "Login/login";
         }
-        
-        return "login_fail";
+        return "/MainPage?faces-redirect=true";
     }
 
-    public String gotoUserPage() {
-        if (logged && loginEmployee()) {
-            return "/Employee/employeeMainPage.xhtml";
-        }
-        if(logged && loginCustomer()){
-            return "/Customer/customerMainPage.xhtml";
-        }
-        else return "/Login/login.xhtml";
-    }
     
     public String logout(){
-        logged=false;
-        actualLoginMessage="Login";
-        return "/index.xhtml";
+        SecurityContextHolder.getContext().setAuthentication(null);
+        FacesContext.getCurrentInstance().getExternalContext().getSessionMap().clear();
+        return "index?faces-redirect=true";
     }
 
-    public String getActualLoginMessage() {
-        return actualLoginMessage;
-    }
-
-    public void setActualLoginMessage(String actualLoginMessage) {
-        this.actualLoginMessage = actualLoginMessage;
-    }
-    
-    private boolean loginEmployee() {
-        isAdmin = employeeService.isAdmin(login);
-        return employeeService.employeeExists(login, password);
-    }
-
-    private boolean loginCustomer() {
-        return customerService.customerExists(login, password);
-    }
 }

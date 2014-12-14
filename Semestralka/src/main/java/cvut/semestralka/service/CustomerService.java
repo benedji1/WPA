@@ -30,10 +30,11 @@ public class CustomerService extends AbstractService {
     public Long addCustomer(CustomerDTO customerDTO, String password) {
         Customer customer = new Customer();
         customer.setEmail(customerDTO.getEmail());
-        customer.setFirstName(customerDTO.getFirst_name());
-        customer.setLastName(customerDTO.getLast_name());
+        customer.setFirstName(customerDTO.getFirstName());
+        customer.setLastName(customerDTO.getLastName());
         customer.setLogin(customerDTO.getLogin());
         customer.setPassword(password);
+        customer.setRole(customerDTO.getRoles());
         Customer saved = genericDao.saveOrUpdate(customer);
         return saved.getId();
     }

@@ -15,7 +15,7 @@ import org.springframework.stereotype.Component;
  */
 @Component
 public class FilmService extends AbstractService {
-    
+
     @Autowired
     DirectorService directorService;
     @Autowired
@@ -33,7 +33,7 @@ public class FilmService extends AbstractService {
     public Long saveFilm(FilmDTO filmDto) {
         Film film = new Film();
         film.setTitle(filmDto.getTitle());
-        film.setRelease_year(filmDto.getRelease_year());
+        film.setRelease_year(filmDto.getReleaseYear());
         Film saved = genericDao.saveOrUpdate(film);
         return saved.getId();
     }
@@ -52,19 +52,18 @@ public class FilmService extends AbstractService {
     }
 
     public List<FilmDTO> getActorsFilms(Long actorId) {
-        List<Film> films = manyToManyDao.getActorFilms(actorId);  
+        List<Film> films = manyToManyDao.getActorFilms(actorId);
         List<FilmDTO> fdtos = new ArrayList<FilmDTO>();
-        for(Film f : films){
+        for (Film f : films) {
             fdtos.add(new FilmDTO(f.getRelease_year(), f.getTitle(), f.getId()));
         }
         return fdtos;
     }
-   
 
     public List<FilmDTO> getFilmsInOrder(Long orderId) {
         List<Film> films = manyToManyDao.getOrderFilms(orderId);
         List<FilmDTO> fdtos = new ArrayList<FilmDTO>();
-        for(Film f : films){
+        for (Film f : films) {
             fdtos.add(new FilmDTO(f.getRelease_year(), f.getTitle(), f.getId()));
         }
         return fdtos;
@@ -99,6 +98,21 @@ public class FilmService extends AbstractService {
             actorService.addFilm(updated, actor.getId());
             return updated;
         }
+    }
+
+    public FilmDTO getFilm(String name, Integer releaseYear) {
+        FilmDTO result = new FilmDTO(releaseYear, name);
+        for (Film f : genericDao.getAll(Film.class)) {
+            if (f.getTitle().equals(name) && releaseYear.equals(f.getRelease_year())) {
+                result.setId(f.getId());
+            }
+        }
+        return result;
+    }
+
+    public FilmDTO getById(Long id) {
+        Film f = genericDao.getById(id, Film.class);
+        return new FilmDTO(f.getRelease_year(), f.getTitle(), f.getId());
     }
 
     /*

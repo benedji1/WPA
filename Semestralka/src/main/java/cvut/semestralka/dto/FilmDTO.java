@@ -8,29 +8,29 @@ import java.util.List;
  */
 public class FilmDTO extends AbstractDTO {
 
-    protected Integer release_year;
+    protected Integer releaseYear;
     protected String title;
     protected List<Long> orders;
     protected List<Long> actors;
 
-    public FilmDTO(Integer release_year, String title, Long id) {
-        this.release_year = release_year;
+    public FilmDTO(Integer releaseYear, String title, Long id) {
+        this.releaseYear = releaseYear;
         this.title = title;
         this.id = id;
     }
 
-    public FilmDTO(Integer release_year, String title) {
-        this.release_year = release_year;
+    public FilmDTO(Integer releaseYear, String title) {
+        this.releaseYear = releaseYear;
         this.title = title;
     }
     
 
-    public Integer getRelease_year() {
-        return release_year;
+    public Integer getReleaseYear() {
+        return releaseYear;
     }
 
-    public void setRelease_year(Integer release_year) {
-        this.release_year = release_year;
+    public void setReleaseYear(Integer release_year) {
+        this.releaseYear = release_year;
     }
 
     public String getTitle() {

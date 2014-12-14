@@ -1,7 +1,9 @@
 package cvut.semestralka.presentation.beans;
 
 import cvut.semestralka.dto.CustomerDTO;
+import cvut.semestralka.dto.EmployeeDTO;
 import cvut.semestralka.service.CustomerService;
+import cvut.semestralka.service.EmployeeService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Scope;
 import org.springframework.stereotype.Component;
@@ -17,6 +19,8 @@ public class RegisterCustomer {
     
     @Autowired
     protected CustomerService customerService;
+    @Autowired
+    protected EmployeeService emplService;
 
     public String getFirst_name() {
         return first_name;
@@ -60,6 +64,11 @@ public class RegisterCustomer {
         CustomerDTO cdto = new CustomerDTO(first_name, last_name, login, email);
         for(CustomerDTO c : customerService.getAllCustomers()){
             if(c.getLogin().equals(cdto.getLogin())){
+                return "bad_login";
+            }
+        }
+        for(EmployeeDTO e : emplService.getAllEmployees()){
+            if(e.getLogin().equals(login)){
                 return "bad_login";
             }
         }

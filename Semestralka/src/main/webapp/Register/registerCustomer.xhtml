@@ -1,0 +1,59 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:h="http://java.sun.com/jsf/html"
+      xmlns:ui="http://java.sun.com/jsf/facelets"
+      xmlns:f="http://java.sun.com/jsf/core">
+    <h:body>
+        <ui:composition template="../template/template.xhtml">           
+            <ui:define name="header">
+                <div class="homeButton">
+                    <p><h:link outcome="/index.xhtml" value="Home"/></p>
+                </div>
+                <h1><h:outputText value="Register new user"/> </h1>
+            </ui:define>
+            <ui:define name="content">
+                <h:form>
+                    <h:messages/>
+                    <table>
+                        <tr>
+                            <td><h:outputLabel value="First name:" for="first_name"/></td>
+                            <td><h:inputText label="First name" id="first_name" value="#{registerCustomer.first_name}" required="true">
+                                    <f:validateLength maximum="120" minimum="2"/>             
+                                </h:inputText></td>
+                        </tr>
+                        <tr>
+                            <td><h:outputLabel value="Last name:" for="last_name"/></td>
+                            <td><h:inputText label="Last name" id="last_name" value="#{registerCustomer.last_name}" required="true">
+                                    <f:validateLength maximum="150" minimum="2"/>             
+                                </h:inputText></td>
+                        </tr>
+                        <tr>
+                            <td> <h:outputLabel value="Email:" for="email"/></td>
+                            <td> <h:inputText label="Email" id="email" value="#{registerCustomer.email}" required="true">
+                                    <f:validateLength maximum="60" minimum="8"/> 
+                                    <f:validateRegex pattern="[\w\.-]*[a-zA-Z0-9_]@[\w\.-]*[a-zA-Z0-9]\.[a-zA-Z][a-zA-Z\.]*[a-zA-Z]"/>
+                                </h:inputText></td>
+                        </tr>
+                        <tr>
+                            <td><h:outputLabel value="Login:" for="login"/></td>
+                            <td><h:inputText label="Login" id="login" value="#{registerCustomer.login}" required="true">
+                                    <f:validateLength maximum="60" minimum="5"/>             
+                                </h:inputText></td>
+                        </tr>
+                        <tr>
+                            <td> <h:outputLabel value="Password:" for="password"/></td>
+                            <td> <h:inputSecret label="Password" id="password" value="#{registerCustomer.password}" required="true">
+                                    <f:validateLength maximum="60" minimum="8"/>             
+                                </h:inputSecret></td>
+                        </tr>
+                    </table>
+
+                    <div>
+                        <h:commandButton action="#{registerCustomer.registerCustomer()}" value="Register"/>
+                    </div>
+                </h:form>
+            </ui:define>
+        </ui:composition>
+    </h:body>
+</html>

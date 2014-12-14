@@ -5,7 +5,9 @@
  */
 package cvut.semestralka.presentation.beans;
 
+import cvut.semestralka.dto.CustomerDTO;
 import cvut.semestralka.dto.EmployeeDTO;
+import cvut.semestralka.service.CustomerService;
 import cvut.semestralka.service.EmployeeService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Scope;
@@ -22,6 +24,8 @@ public class AddNewEmployee {
     protected String address, position, login, password, firstName, lastName;
     @Autowired
     EmployeeService employeeService;
+    @Autowired
+    CustomerService customerService;
 
     public String getFirstName() {
         return firstName;
@@ -74,6 +78,16 @@ public class AddNewEmployee {
     
     public String addEmployee(){
         EmployeeDTO edto = new EmployeeDTO(address, position, login, firstName, lastName);
+        for(CustomerDTO c : customerService.getAllCustomers()){
+            if(c.getLogin().equals(login)){
+                return "bad_login";
+            }
+        }
+        for(EmployeeDTO e : employeeService.getAllEmployees()){
+            if(e.getLogin().equals(login)){
+                return "bad_login";
+            }
+        }
         employeeService.addEmployee(edto, password);
         return "added";
     }

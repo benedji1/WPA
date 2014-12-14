@@ -1,33 +1,33 @@
 package cvut.semestralka.dto;
 
-public abstract class UserDTO extends AbstractDTO{
+public abstract class UserDTO extends PersonDTO{
     
-    protected String first_name, last_name;
+    protected String login;
+    protected String roles;
 
-    public UserDTO(String first_name, String last_name, Long id) {
-        this.first_name = first_name;
-        this.last_name = last_name;
+    public UserDTO(String first_name, String last_name, Long id, String login) {
+        super(first_name, last_name, id);
+        this.login = login;
     }
 
     public UserDTO(String first_name, String last_name) {
-        this.first_name = first_name;
-        this.last_name = last_name;
+       super(first_name, last_name);
     }
     
+    public String getLogin() {
+        return login;
+    }
+
+    public void setLogin(String login) {
+        this.login = login;
+    }
+
+    public String getRoles() {
+        return roles;
+    }
+
+    public void setRoles(String roles) {
+        this.roles = roles;    }
+
     
-    public String getFirst_name() {
-        return first_name;
-    }
-
-    public void setFirst_name(String first_name) {
-        this.first_name = first_name;
-    }
-
-    public String getLast_name() {
-        return last_name;
-    }
-
-    public void setLast_name(String last_name) {
-        this.last_name = last_name;
-    }  
 }

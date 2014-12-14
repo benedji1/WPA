@@ -31,8 +31,8 @@ public class DirectorService extends AbstractService {
 
     public DirectorDTO addDirector(DirectorDTO directorDTO) {
         Director director = new Director();
-        director.setFirstName(directorDTO.getFirst_name());
-        director.setLastName(directorDTO.getLast_name());
+        director.setFirstName(directorDTO.getFirstName());
+        director.setLastName(directorDTO.getLastName());
         
         List<Film> films = new ArrayList<Film>();
         
