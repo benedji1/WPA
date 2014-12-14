@@ -1,8 +1,11 @@
 package cvut.semestralka.bo;
 
 import java.util.List;
+import javax.persistence.CascadeType;
 import javax.persistence.Entity;
+import javax.persistence.FetchType;
 import javax.persistence.JoinColumn;
+import javax.persistence.JoinTable;
 import javax.persistence.ManyToMany;
 import javax.persistence.ManyToOne;
 import javax.persistence.NamedQuery;
@@ -18,11 +21,18 @@ public class Film extends DomainEntity {
     protected String title;
     protected Integer release_year;
 
-    @ManyToMany(targetEntity = Orders.class, mappedBy = "films")
+    @ManyToMany
+    @JoinTable(name="order_film", 
+            joinColumns = {@JoinColumn(name="id_order", referencedColumnName = "id")},
+            inverseJoinColumns = {@JoinColumn(name="id_film", referencedColumnName = "id")})
     @OrderBy("id_customer DESC")
     protected List<Orders> orders;
 
-    @ManyToMany(targetEntity = Actor.class, mappedBy = "films")
+    @ManyToMany
+    @JoinTable(name = "actor_film", joinColumns = {
+        @JoinColumn(name = "id_actor", referencedColumnName = "id")},
+            inverseJoinColumns = {
+                @JoinColumn(name = "id_film", referencedColumnName = "id")})
     @OrderBy("last_name DESC")
     protected List<Actor> actors;
 

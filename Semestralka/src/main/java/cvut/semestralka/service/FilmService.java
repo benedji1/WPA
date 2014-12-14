@@ -3,6 +3,7 @@ package cvut.semestralka.service;
 import cvut.semestralka.bo.Actor;
 import cvut.semestralka.bo.Director;
 import cvut.semestralka.bo.Film;
+import cvut.semestralka.dto.ActorDTO;
 import cvut.semestralka.dto.FilmDTO;
 import java.util.ArrayList;
 import java.util.List;
@@ -39,6 +40,10 @@ public class FilmService extends AbstractService {
     }
 
     public Long deleteFilm(FilmDTO film) {
+       /* List<ActorDTO> actors = actorService.getAllActorsFromFilm(film.getId());
+        for(ActorDTO a : actors){
+            actorService.removeFilm(film.getId(), a.getId());
+        }*/
         return genericDao.remove(Film.class, film.getId());
     }
 
@@ -114,8 +119,4 @@ public class FilmService extends AbstractService {
         Film f = genericDao.getById(id, Film.class);
         return new FilmDTO(f.getRelease_year(), f.getTitle(), f.getId());
     }
-
-    /*
-     dalsi metody...
-     */
 }

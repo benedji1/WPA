@@ -30,12 +30,14 @@ and open the template in the editor.
                         <h:link outcome="/Employee/addActor.xhtml" value="Add actor"/><br/>
                         <h:link outcome="/Employee/addFilm.xhtml" value="Add film"/><br/>                        
                         <h:link outcome="/Employee/actorDetails.xhtml" value="Actors details"/><br/>
+                        <h:link outcome="/Employee/directorDetails.xhtml" value="Director details"/><br/>
                         <h:link outcome="/Employee/addDirector.xhtml" value="Add director"/><br/>
                         <h:link outcome="/Employee/addActorToFilm.xhtml" value="Add actor to film"/><br/>
+                        <h:link outcome="/Employee/addDirectorToFilm.xhtml" value="Add director to film"/><br/>
                     </sec:ifAnyGranted> 
                     <sec:ifAnyGranted roles="ROLE_CUSTOMER">
-                        <h:link outcome="addActor.xhtml" value="Create order"/><br/>
-                        <h:link outcome="addFilm.xhtml" value="My orders"/><br/>
+                        <h:link outcome="/Customer/createOrder.xhtml" value="Create order"/><br/>
+                        <h:link outcome="/Customer/myOrders.xhtml" value="My orders"/><br/>
                     </sec:ifAnyGranted> 
                 </h:form>
             </ui:define>

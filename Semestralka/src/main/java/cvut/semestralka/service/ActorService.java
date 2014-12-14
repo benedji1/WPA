@@ -66,4 +66,13 @@ public class ActorService extends AbstractService {
         return actor.getFirstName() + " " + actor.getLastName();
     }
 
+/*    public void removeFilm(Long filmID, Long actorID) {
+        Actor actor = genericDao.getById(actorID, Actor.class);
+        List<Film> films = actor.getFilms();
+        Film f = genericDao.getById(filmID, Film.class);
+        films.remove(f);
+        actor.setFilms(films);
+        genericDao.saveOrUpdate(actor);
+    }*/
+
 }

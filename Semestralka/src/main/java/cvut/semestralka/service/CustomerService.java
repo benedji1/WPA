@@ -54,4 +54,11 @@ public class CustomerService extends AbstractService {
         }
         return exists;
     }
+    
+    public Long customerID(String login){
+        for(Customer c : genericDao.getAll(Customer.class)){
+            if(c.getLogin().equals(login)) return c.getId();
+        }
+        return 0L;
+    }
 }

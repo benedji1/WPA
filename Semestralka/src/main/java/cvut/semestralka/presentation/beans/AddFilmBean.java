@@ -20,23 +20,32 @@ public class AddFilmBean {
 
     protected Integer release_year;
     protected String title;
-    protected ActorDTO actorDTO;
-    protected FilmDTO filmDTO;
+    protected Long filmID;
+    protected Long actorID;
+    protected Long directorID;
 
-    public ActorDTO getActorDTO() {
-        return actorDTO;
+    public Long getDirectorID() {
+        return directorID;
     }
 
-    public void setActorDTO(ActorDTO actorDTO) {
-        this.actorDTO = actorDTO;
+    public void setDirectorID(Long directorID) {
+        this.directorID = directorID;
     }
 
-    public FilmDTO getFilmDTO() {
-        return filmDTO;
+    public Long getActorID() {
+        return actorID;
     }
 
-    public void setFilmDTO(FilmDTO filmDTO) {
-        this.filmDTO = filmDTO;
+    public void setActorID(Long actorID) {
+        this.actorID = actorID;
+    }
+
+    public Long getFilmID() {
+        return filmID;
+    }
+
+    public void setFilmID(Long filmID) {
+        this.filmID = filmID;
     }
 
     public Integer getRelease_year() {
@@ -60,8 +69,12 @@ public class AddFilmBean {
     }
 
     public String addActorToFilm() {
-        System.out.println(filmDTO.getId());
-        //filmService.addActor(actorID, filmService.getById(filmID));
+        filmService.addActor(actorID, filmService.getById(filmID));
+        return "/Employee/added?faces-redirect=true";
+    }
+    
+    public String addDirectorToFilm() {
+        filmService.addDirector(directorID, filmService.getById(filmID));
         return "/Employee/added?faces-redirect=true";
     }
 

@@ -46,10 +46,14 @@ public class DirectorService extends AbstractService {
         return new DirectorDTO(saved.getFirstName(), saved.getLastName(), saved.getId());
     }
 
-    public Long deleteDirector(DirectorDTO directorDTO) {
-        return genericDao.remove(Director.class, directorDTO.getId());
+    public Long deleteDirector(Long directorID) {
+        return genericDao.remove(Director.class, directorID);
     }
-
+    
+    public String getDirectorName(Long directorID){
+        Director d = genericDao.getById(directorID, Director.class);
+        return d.getFirstName() + " " + d.getLastName();
+    }
 
     /*
      dalsi metody...

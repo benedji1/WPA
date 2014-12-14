@@ -1,0 +1,39 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!--
+To change this license header, choose License Headers in Project Properties.
+To change this template file, choose Tools | Templates
+and open the template in the editor.
+-->
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:h="http://java.sun.com/jsf/html"
+      xmlns:ui="http://java.sun.com/jsf/facelets"
+      xmlns:f="http://java.sun.com/jsf/core">
+    <h:body>
+        <ui:composition template="../template/template.xhtml">           
+            <ui:define name="header">
+                <h1><h:outputText value="Director details"/> </h1>
+            </ui:define>
+            <ui:define name="content">
+                <h:form>
+                    <h:panelGrid columns="4">                        
+                        <h:outputText value="First name"/>
+                        <h:outputText value="Last name"/>
+                        <h:outputText value="Director films"/>
+                        <h:outputText value="Delete"/>
+                    </h:panelGrid>
+                    <ui:repeat var="director" value="#{directorService.allDirectors}">
+                        <h:panelGrid columns="4">   
+                            <h:outputText value="#{director.firstName}"/>
+                            <h:outputText value="#{director.lastName}"/> 
+                            <h:commandButton action="#{directorBean.showFilms(director.id)}" value="Films"/> 
+                            <h:commandButton action="#{directorBean.deleteDirector(director.id)}" value="Delete"/> 
+                        </h:panelGrid>
+                    </ui:repeat>
+
+                </h:form>
+            </ui:define>
+        </ui:composition>
+    </h:body>
+</html>
+

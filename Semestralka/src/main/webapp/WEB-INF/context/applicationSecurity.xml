@@ -19,7 +19,7 @@
         <form-login login-page="/Login/login.xhtml" />
         <http-basic />
         <intercept-url pattern="/index.xhtml" access="IS_AUTHENTICATED_ANONYMOUSLY"/>
-        <intercept-url pattern="/Customer/registerCustomer.xhtml" access="IS_AUTHENTICATED_ANONYMOUSLY" />
+        <intercept-url pattern="/Register/registerCustomer.xhtml" access="IS_AUTHENTICATED_ANONYMOUSLY" />
         <intercept-url pattern="/Login/login.xhtml" access="IS_AUTHENTICATED_ANONYMOUSLY" />
         <intercept-url pattern="/**" access="ROLE_USER"/>
         <logout invalidate-session="true" delete-cookies="true" logout-success-url="/login.xhtml" />
@@ -32,22 +32,6 @@
     
     <authentication-manager alias="authenticationManager">
         <authentication-provider ref="flexibleAuthenticationProvider" />
-        
-<!--        <authentication-provider>
-            <user-service>
-                <user name="test" password="test" authorities="ROLE_ADMIN,ROLE_USER" />
-                <user name="test2" password="test2" authorities="ROLE_USER" />
-            </user-service>
-        </authentication-provider>-->
-        
-        <!--nekdy take lze pouzit jiz existujici, jednoduchy provider pro JDBC -->
-        <!--        <security:authentication-provider>
-            <security:jdbc-user-service data-source-ref="dataSource"
-                users-by-username-query="SELECT username,password,true FROM person WHERE username=?"
-                authorities-by-username-query="SELECT username,groupname FROM person WHERE username=?"
-                role-prefix="ROLE_" />
-            <security:password-encoder base64="false" hash="sha" />
-        </security:authentication-provider>-->
     </authentication-manager>    
 
 </beans:beans>

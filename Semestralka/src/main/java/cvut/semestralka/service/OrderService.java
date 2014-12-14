@@ -13,12 +13,14 @@ import cvut.semestralka.dto.OrderDTO;
 import java.util.ArrayList;
 import java.util.Iterator;
 import java.util.List;
+import org.springframework.stereotype.Component;
 
 
 /**
  *
  * @author Jirka
  */
+@Component
 public class OrderService extends AbstractService {
 
     private static OrderService orderService;

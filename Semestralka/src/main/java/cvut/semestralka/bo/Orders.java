@@ -14,7 +14,6 @@ import javax.persistence.Table;
 @NamedQuery(name = "getFilmOrders",query = "select o from Orders o inner join o.films film where film.id = :value")
 @Table(name="orders")
 public class Orders extends DomainEntity{
-    
     @ManyToOne
     @JoinColumn(name="id_employee")
     protected Employee employee;
@@ -23,10 +22,7 @@ public class Orders extends DomainEntity{
     @JoinColumn(name="id_customer")
     protected Customer customer;
     
-    @ManyToMany
-    @JoinTable(name="order_film", 
-            joinColumns = {@JoinColumn(name="id_order", referencedColumnName = "id")},
-            inverseJoinColumns = {@JoinColumn(name="id_film", referencedColumnName = "id")})
+    @ManyToMany(targetEntity = Film.class, mappedBy = "orders")
     @OrderBy("title DESC")
     protected List<Film> films;
 
